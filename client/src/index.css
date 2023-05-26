@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.md_nav{
+    @apply md:flex md:items-center z-[-1] md:z-auto md:static md:w-auto md:py-0 md:pl-0 md:opacity-100
+}
