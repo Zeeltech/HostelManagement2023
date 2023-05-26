@@ -59,7 +59,7 @@ function StudentLogin() {
           <div className="w-full">
             Password
             <input
-              type="text"
+              type="password"
               value={password}
               onChange={(ev) => {
                 setPassword(ev.target.value);
@@ -71,7 +71,7 @@ function StudentLogin() {
           <div>
             Confirm Password
             <input
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={(ev) => {
                 setConfirmPassword(ev.target.value);
