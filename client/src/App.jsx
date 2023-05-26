@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import axios from "axios";
 import * as myContants from "../myConstants";
 import IndexPage from "./pages/IndexPage";
+import { UserContext, UserContextProvider } from "../UserContext";
 
 import RegisterPage from "./pages/RegisterPage";
 import RectorSignup from "./pages/Rector/RectorSignup";
@@ -17,9 +18,9 @@ axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        
+    <UserContextProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
         <Route path="/" element={<IndexPage />} />
 
         <Route path="/register" element={<RegisterPage />} />
@@ -32,9 +33,9 @@ function App() {
 
         <Route path="/student/register" element={<StudentSignup />} />
         <Route path="/student/login" element={<StudentLogin />} />
-
-      </Route>
-    </Routes>
+        </Route>
+      </Routes>
+    </UserContextProvider>
   );
 }
 
