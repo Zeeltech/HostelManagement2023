@@ -8,7 +8,7 @@ function RectorSignup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [profilePhoto, setProfilePhoto] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -27,18 +27,20 @@ function RectorSignup() {
       toast.error("Password and Confirm Password is not matched");
     } else {
       try {
-        const profilePhotoName = profilePhoto.split("\\").pop();
         const formData = new FormData();
-        formData.append("profilePhoto", profilePhotoName);
-        console.log(formData);
-        const { data } = await axios.post("/rector/register", {
-          name,
-          email,
-          phone,
-          password,
-          profilePhoto:profilePhotoName,
+        formData.append("profilePhoto", profilePhoto);
+        formData.append("name", name); // Add the name field
+        formData.append("email", email); // Add the email field
+        formData.append("password", password); // Add the password field
+        formData.append("phone", phone); // Add the phone field
+
+        const { data } = await axios.post(
+          "/rector/register",
           formData,
-        });
+          {
+            headers: { "Content-type": "multipart/form-data" },
+          }
+        );
         // if (data.message === "register successfull")
         //   toast.success("Registration Successfull");
       } catch (err) {
@@ -100,9 +102,8 @@ function RectorSignup() {
             Upload profile profilePhoto
             <input
               type="file"
-              value={profilePhoto}
               onChange={(ev) => {
-                setProfilePhoto(ev.target.value);
+                setProfilePhoto(ev.target.files[0]);
               }}
               name="profilePhoto"
               className="hidden "
@@ -127,7 +128,7 @@ function RectorSignup() {
           <div className="w-full">
             Password
             <input
-              type="text"
+              type="password"
               value={password}
               onChange={(ev) => {
                 setPassword(ev.target.value);
@@ -139,7 +140,7 @@ function RectorSignup() {
           <div>
             Confirm Password
             <input
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={(ev) => {
                 setConfirmPassword(ev.target.value);
