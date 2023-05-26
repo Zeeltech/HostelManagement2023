@@ -10,7 +10,10 @@ const router = express.Router();
 const {
   registerAccountant,
   loginAccountant,
+  logoutAccountant,
 } = require("../controllers/accountantController");
+
+const { protectAccountant } = require("../middlewares/accountantProtect");
 
 /* MULTER CONFIGURATIONS */
 const storage = multer.diskStorage({
@@ -42,5 +45,6 @@ const upload = multer({
 /* APIs */
 router.post("/register", upload.single("profilePhoto"), registerAccountant);
 router.post("/login", loginAccountant);
+router.post("/logout", logoutAccountant);
 
 module.exports = router;

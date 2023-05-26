@@ -10,6 +10,7 @@ const router = express.Router();
 const {
   registerRector,
   loginRector,
+  logoutRector,
 } = require("../controllers/rectorController");
 
 /* MULTER CONFIGURATIONS */
@@ -42,5 +43,6 @@ const upload = multer({
 /* APIs */
 router.post("/register", upload.single("profilePhoto"), registerRector);
 router.post("/login", loginRector);
+router.post("/logout", logoutRector);
 
 module.exports = router;

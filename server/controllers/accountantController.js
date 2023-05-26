@@ -71,8 +71,7 @@ const loginAccountant = async (req, res) => {
     return res
       .cookie("accountantToken", token, {
         expires: new Date(Date.now() + 86400000),
-        sameSite: "none",
-        secure: true,
+        httpOnly: true,
       })
       .status(201)
       .json(accountantExists);
@@ -82,7 +81,22 @@ const loginAccountant = async (req, res) => {
   }
 };
 
+const logoutAccountant = (req, res) => {
+  try {
+    const { accountantToken } = req.cookies;
+    if (accountantToken) {
+      res.status(201).clearCookie("accountantToken").json(true);
+    } else {
+      res.status(404).json(false);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
+
 module.exports = {
   registerAccountant,
   loginAccountant,
+  logoutAccountant,
 };
