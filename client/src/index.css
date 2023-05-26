@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.md_nav{
-    @apply md:flex md:items-center z-[-1] md:z-auto md:static md:w-auto md:py-0 md:pl-0 md:opacity-100
+
+* {
+  font-family: "Rubik", sans-serif;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  @apply w-full border  rounded-xl py-2 px-4 text-black;
+}
+
+button {
+  @apply  w-full bg-primary_element rounded-xl px-4 py-2  hover:scale-95 hover:transition-all duration-75;
 }

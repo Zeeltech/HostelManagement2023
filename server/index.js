@@ -1,17 +1,25 @@
+/* MODULES */
 const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const colors = require("colors");
 const connectDB = require("./config/db");
+const bodyParser = require("body-parser");
 
+/* ROUTERS */
+const accountantRouter = require("./routes/accountantRoutes");
+const rectorRouter = require("./routes/rectorRoutes");
+const studentRouter = require("./routes/studentRoutes");
+
+/* CONFIGURATIONS */
 dotenv.config();
-
 const PORT = process.env.PORT || 4004;
 
+/* EXPRESS CONFIGURATIONS */
 const app = express();
-
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
@@ -19,6 +27,17 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.urlencoded({ extended: false }));
 
-app.listen(PORT, () => console.log(`Server started on ${PORT}`.blue.bold));
+/* STARTUP */
+app.listen(PORT, () =>
+  console.log(
+    `Server started on`.cyan.bold + ` http://localhost:${PORT}`.blue.bold
+  )
+);
 connectDB();
+
+/* APIs */
+app.use("/accountant", accountantRouter);
+app.use("/rector", rectorRouter);
+app.use("/student", studentRouter);
