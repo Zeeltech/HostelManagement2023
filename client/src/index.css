@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Rubik", sans-serif;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  @apply w-full border  rounded-xl py-2 px-4 text-black;
+}
+
+button {
+  @apply  w-full bg-primary_element rounded-xl px-4 py-2  hover:scale-95 hover:transition-all duration-75;
+}

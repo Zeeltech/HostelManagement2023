@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         primary_bg: "#F6F6F6", //Seasalt
-        primary_section: "F0F6F6", //light green
+        primary_section: "#F0F6F6", //light green
         primary_element: "#26C499", //Green
         primary_font_light: "#FFFFFF", //White font
         primary_font_dark: "#000000", //Black font
