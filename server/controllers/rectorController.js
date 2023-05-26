@@ -68,8 +68,7 @@ const loginRector = async (req, res) => {
     return res
       .cookie("rectorToken", token, {
         expires: new Date(Date.now() + 86400000),
-        sameSite: "none",
-        secure: true,
+        httpOnly: true,
       })
       .status(201)
       .json(rectorExists);
@@ -79,7 +78,22 @@ const loginRector = async (req, res) => {
   }
 };
 
+const logoutRector = (req, res) => {
+  try {
+    const { rectorToken } = req.cookies;
+    if (rectorToken) {
+      res.status(201).clearCookie("rectorToken").json(true);
+    } else {
+      res.status(404).json(false);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
+
 module.exports = {
   registerRector,
   loginRector,
+  logoutRector,
 };

@@ -42,7 +42,6 @@ const registerStudent = async (req, res) => {
 const loginStudent = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email);
     const studentExists = await Student.findOne({ email });
 
     if (!studentExists) {
@@ -71,8 +70,7 @@ const loginStudent = async (req, res) => {
     return res
       .cookie("studentToken", token, {
         expires: new Date(Date.now() + 86400000),
-        sameSite: "none",
-        secure: true,
+        httpOnly: true,
       })
       .status(201)
       .json(studentExists);
@@ -82,7 +80,22 @@ const loginStudent = async (req, res) => {
   }
 };
 
+const logoutStudent = (req, res) => {
+  try {
+    const { studentToken } = req.cookies;
+    if (studentToken) {
+      res.status(201).clearCookie("studentToken").json(true);
+    } else {
+      res.status(404).json(false);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
+
 module.exports = {
   registerStudent,
   loginStudent,
+  logoutStudent,
 };

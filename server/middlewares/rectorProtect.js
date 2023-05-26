@@ -5,8 +5,8 @@ const protectRector = async (req, res, next) => {
   try {
     const rectorToken = req.cookies.rectorToken;
 
-    if (!token) {
-      res.status(401).json({ message: "Token does not exists" });
+    if (!rectorToken) {
+      return res.status(401).json({ message: "Token does not exists" });
     }
 
     const verifiedRector = jwt.verify(rectorToken, process.env.JWT_SECRET);
@@ -16,7 +16,9 @@ const protectRector = async (req, res, next) => {
     });
 
     req.user = root_user;
+    next();
   } catch (error) {
+    console.log(error);
     res.status(401).json({ message: "Authorization failed" });
   }
 };

@@ -5,8 +5,8 @@ const protectAccountant = async (req, res, next) => {
   try {
     const accountantToken = req.cookies.accountantToken;
 
-    if (!token) {
-      res.status(401).json({ message: "Token does not exists" });
+    if (!accountantToken) {
+      return res.status(401).json({ message: "Token does not exists" });
     }
 
     const verifiedAccountant = jwt.verify(
@@ -19,7 +19,9 @@ const protectAccountant = async (req, res, next) => {
     });
 
     req.user = root_user;
+    next();
   } catch (error) {
+    console.log(error);
     res.status(401).json({ message: "Authorization failed" });
   }
 };
