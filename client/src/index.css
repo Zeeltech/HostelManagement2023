@@ -2,17 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
-  font-family: "Rubik", sans-serif;
+  /*  font-family: "Poppins", sans-serif; */
+  font-family: "Raleway", sans-serif;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-  @apply w-full border  rounded-xl py-2 px-4 text-black;
+  @apply w-full border-2 border-bg_dark_section rounded-md py-2 px-4 text-black;
 }
 
-button {
-  @apply  w-full bg-primary_element rounded-xl px-4 py-2  hover:scale-95 hover:transition-all duration-75;
+.btn {
+  @apply w-full bg-bg_dark_section rounded-md py-2.5 px-4 text-bg_white  hover:scale-95 hover:bg-bg_red duration-200;
+}
+
+.give_height {
+  @apply min-h-[calc(100vh-64px)];
+}
+
+.labels {
+  @apply bg-bg_dark_section text-bg_white rounded-xl shadow-md border-4 border-bg_white;
+}
+
+.red-hover {
+  @apply hover:scale-95 hover:bg-bg_red hover:text-bg_white_font duration-200;
 }

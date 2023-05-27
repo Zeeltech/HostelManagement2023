@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary_bg: "#F6F6F6", //Seasalt
-        primary_section: "#F0F6F6", //light green
-        primary_element: "#26C499", //Green
-        primary_font_light: "#FFFFFF", //White font
-        primary_font_dark: "#000000", //Black font
+        bg_white: "#FFFFFF",
+        bg_light_section: "#9197AE",
+        bg_dark_section: "#2b2d42",
+        bg_dark_red: "#d90429",
+        bg_red: "#ef233c",
+        bg_white_font: "#FFFFFF",
+        bg_dark_font: "#2b2d42",
       },
     },
   },
