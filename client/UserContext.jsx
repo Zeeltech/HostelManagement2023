@@ -5,7 +5,7 @@ export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const [rector, setRector] = useState(null);
-  const [accountant, setAccountant] = useState({ name: "Zeel" });
+  const [accountant, setAccountant] = useState(null);
   const [student, setStudent] = useState(null);
 
   useEffect(() => {

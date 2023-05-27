@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo2.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import RectorNavList from "./RectorNavList";
@@ -23,12 +23,21 @@ function Header() {
   }
 
   return (
-    <div className="p-5 bg-primary_section shadow-md">
+    <div className="sticky py-2 shadow-md bg-bg_dark_section">
       <header className="md:flex md:justify-between md:items-center">
-        <div className="flex justify-between items-center">
-          <Link to={"/"} className="flex items-center gap-2 cursor-pointer">
-            <img className="h-9 w-11 " src={logo} alt="" />
-            <span className="font-bold text-2xl text-primary">APC Nadiad</span>
+        <div className="flex justify-between items-center my-1 ">
+          <Link
+            to={"/"}
+            className="flex items-center gap-2 cursor-pointer px-2"
+          >
+            <img
+              className="p-1 h-10 w-10 border-2 border-bg_white bg-bg_white rounded-full"
+              src={logo}
+              alt=""
+            />
+            <span className="text-lg font-semibold text-bg_white_font">
+              APC Nadiad
+            </span>
           </Link>
           {menuButtonToggel ? (
             // Menu-button icon

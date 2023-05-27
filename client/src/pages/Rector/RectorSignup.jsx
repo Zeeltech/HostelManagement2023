@@ -28,24 +28,23 @@ function RectorSignup() {
     } else {
       try {
         const formData = new FormData();
+
         formData.append("profilePhoto", profilePhoto);
         formData.append("name", name); // Add the name field
         formData.append("email", email); // Add the email field
         formData.append("password", password); // Add the password field
         formData.append("phone", phone); // Add the phone field
 
-        const { data } = await axios.post(
-          "/rector/register",
-          formData,
-          {
+        await axios
+          .post("/rector/register", formData, {
             headers: { "Content-type": "multipart/form-data" },
-          }
-        );
-        // if (data.message === "register successfull")
-        //   toast.success("Registration Successfull");
+          })
+          .then((res) => {
+            if (res.status === 200) toast.success("Registration Successfull");
+          });
       } catch (err) {
-        console.log(err + " -> from rector register page");
-        toast.error("Registration failed");
+        if (err.response.status === 409) toast.error("User already exists");
+        console.log(err);
       }
     }
   }
@@ -53,36 +52,36 @@ function RectorSignup() {
   return (
     <>
       <ToastContainer />
-      <div className="h-screen flex justify-center items-center ">
+      <div className="give-height flex justify-center items-center mt-6 text-bg_white_font font-semibold text-sm">
         <form
           onSubmit={registerRector}
-          className="bg-primary_section p-7 rounded-xl flex flex-col justify-center items-center gap-2"
+          className="bg-bg_white text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2"
         >
-          <div className="text-2xl text-primary_font_dark">
-            Create an account for Rector
-          </div>
+          <div className="text-xl mb-4">Create an account for Rector</div>
           <div className="w-full">
             Name
             <input
               type="text"
               value={name}
+              className="mt-1 mb-2"
               onChange={(ev) => {
                 setName(ev.target.value);
               }}
               name="name"
-              placeholder="Mehul chovatiya"
+              placeholder="Enter your name"
             />
           </div>
           <div className="w-full">
-            email
+            Email
             <input
               type="text"
               value={email}
+              className="mt-1 mb-2"
               onChange={(ev) => {
                 setEmail(ev.target.value);
               }}
               name="email"
-              placeholder="abc2001@gmail.com"
+              placeholder="Enter your email "
             />
           </div>
           <div className="w-full">
@@ -90,41 +89,15 @@ function RectorSignup() {
             <input
               type="text"
               value={phone}
+              className="mt-1 mb-2"
               onChange={(ev) => {
                 setPhone(ev.target.value);
               }}
               name="phone"
-              placeholder="0123456789"
+              placeholder="Enter your phone number"
             />
           </div>
 
-          <label className="flex flex-col w-full">
-            Upload profile profilePhoto
-            <input
-              type="file"
-              onChange={(ev) => {
-                setProfilePhoto(ev.target.files[0]);
-              }}
-              name="profilePhoto"
-              className="hidden "
-            />
-            <div className="mt-1 bg-primary_element w-full p-1 rounded-xl flex justify-center items-center cursor-pointer hover:scale-95 hover:transition-all duration-75">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6  "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                />
-              </svg>
-            </div>
-          </label>
           <div className="w-full">
             Password
             <input
@@ -134,10 +107,11 @@ function RectorSignup() {
                 setPassword(ev.target.value);
               }}
               name="password"
-              placeholder="......"
+              placeholder="Enter the password"
+              className="mt-1 mb-2"
             />
           </div>
-          <div>
+          <div className="w-full">
             Confirm Password
             <input
               type="password"
@@ -146,10 +120,40 @@ function RectorSignup() {
                 setConfirmPassword(ev.target.value);
               }}
               name="confirmPassword"
-              placeholder="......"
+              placeholder="Repeat the password"
+              className="mt-1 mb-2"
             />
           </div>
-          <button>Create an account</button>
+          <label className="flex flex-col w-full">
+            <div className="flex items-center gap-4">
+              Upload&nbsp;profile&nbsp;photo
+              <input
+                type="file"
+                onChange={(ev) => {
+                  setProfilePhoto(ev.target.files[0]);
+                }}
+                name="profilePhoto"
+                className="hidden mt-1 mb-2"
+              />
+              <div className="mt-1 bg-bg_red hover:bg-bg_dark_section w-full p-1 rounded-md py-2 px-4 text-bg_white flex justify-center items-center cursor-pointer hover:scale-95 hover:transition-all duration-75">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                  />
+                </svg>
+              </div>
+            </div>
+          </label>
+          <button className="btn">Create an account</button>
           <div>
             Already have an account?{" "}
             <Link to={"/rector/login"} className="text-blue-600 ">

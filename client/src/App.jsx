@@ -6,6 +6,7 @@ import IndexPage from "./pages/IndexPage";
 import { UserContext, UserContextProvider } from "../UserContext";
 
 import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 import RectorSignup from "./pages/Rector/RectorSignup";
 import RectorLogin from "./pages/Rector/RectorLogin";
 import AccountantSignup from "./pages/Accountant/AccountantSignup";
@@ -21,18 +22,19 @@ function App() {
     <UserContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-        <Route path="/" element={<IndexPage />} />
+          <Route path="/" element={<IndexPage />} />
 
-        <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/rector/register" element={<RectorSignup />} />
-        <Route path="/rector/login" element={<RectorLogin />} />
+          <Route path="/rector/register" element={<RectorSignup />} />
+          <Route path="/rector/login" element={<RectorLogin />} />
 
-        <Route path="/accountant/register" element={<AccountantSignup />} />
-        <Route path="/accountant/login" element={<AccountantLogin />} />
+          <Route path="/accountant/register" element={<AccountantSignup />} />
+          <Route path="/accountant/login" element={<AccountantLogin />} />
 
-        <Route path="/student/register" element={<StudentSignup />} />
-        <Route path="/student/login" element={<StudentLogin />} />
+          <Route path="/student/register" element={<StudentSignup />} />
+          <Route path="/student/login" element={<StudentLogin />} />
         </Route>
       </Routes>
     </UserContextProvider>

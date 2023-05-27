@@ -16,7 +16,6 @@ const registerRector = async (req, res) => {
     }
 
     const rectorExists = await Rector.findOne({ email });
-
     if (rectorExists) {
       return res.status(409).json({ message: "User already exists" });
     }

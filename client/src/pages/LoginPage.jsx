@@ -4,16 +4,16 @@ import accountant from "../assets/Accountant.png";
 import rector from "../assets/Rector.png";
 import { Link } from "react-router-dom";
 
-function RegisterPage() {
+function LoginPage() {
   return (
     <>
       <div className="h-[80vh] flex justify-center items-center flex-col gap-8">
         <span className="font-semibold text-2xl labels p-4">
-          Select your role to register
+          Select your role to login
         </span>
         <div className="flex justify-center items-center gap-4 p-4 rounded-lg">
           <Link
-            to="/rector/register"
+            to="/rector/login"
             className="labels p-4 flex flex-col gap-1 justify-center items-center text-bg_dark_font red-hover"
           >
             <img
@@ -23,7 +23,7 @@ function RegisterPage() {
             <span className="font-semibold cursor-pointer">Rector</span>
           </Link>
           <Link
-            to="/accountant/register"
+            to="/accountant/login"
             className="labels p-4 flex flex-col gap-1 justify-center items-center text-bg_dark_font red-hover"
           >
             <img
@@ -33,7 +33,7 @@ function RegisterPage() {
             <span className="font-semibold cursor-pointer">Accountant</span>
           </Link>
           <Link
-            to="/student/register"
+            to="/student/login"
             className="labels p-4 flex flex-col gap-1 justify-center items-center text-bg_dark_font red-hover"
           >
             <img
@@ -48,4 +48,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginPage;
