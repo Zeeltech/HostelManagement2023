@@ -11,6 +11,8 @@ const bodyParser = require("body-parser");
 const accountantRouter = require("./routes/accountantRoutes");
 const rectorRouter = require("./routes/rectorRoutes");
 const studentRouter = require("./routes/studentRoutes");
+const foodRouter = require("./routes/foodRoutes");
+const mealRouter = require("./routes/mealRoutes")
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -41,3 +43,5 @@ connectDB();
 app.use("/accountant", accountantRouter);
 app.use("/rector", rectorRouter);
 app.use("/student", studentRouter);
+app.use("/food", foodRouter);
+app.use("/meal",mealRouter)
