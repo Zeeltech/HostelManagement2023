@@ -9,6 +9,8 @@
 
 ** AC AND NON AC ROOMS **
 ** Video call **
+** Leave and scan **
+** 
 ** Fine if something broken **
 
     => Rector   => Everyday food - [Add new item + see previous items] - Update menu
