@@ -5,11 +5,8 @@ import * as myContants from "../myConstants";
 import IndexPage from "./pages/IndexPage";
 import { UserContext, UserContextProvider } from "../UserContext";
 
-import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import RectorSignup from "./pages/Rector/RectorSignup";
 import RectorLogin from "./pages/Rector/RectorLogin";
-import AccountantSignup from "./pages/Accountant/AccountantSignup";
 import AccountantLogin from "./pages/Accountant/AccountantLogin";
 import StudentSignup from "./pages/Student/StudentSignup";
 import StudentLogin from "./pages/Student/StudentLogin";
@@ -24,13 +21,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
 
-          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/rector/register" element={<RectorSignup />} />
           <Route path="/rector/login" element={<RectorLogin />} />
 
-          <Route path="/accountant/register" element={<AccountantSignup />} />
           <Route path="/accountant/login" element={<AccountantLogin />} />
 
           <Route path="/student/register" element={<StudentSignup />} />

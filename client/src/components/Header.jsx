@@ -16,9 +16,9 @@ function Header() {
 
     // For menu button -> close button
     menuButtonToggel === true
-      ? (setMenuButtonToggel(false), list.classList.remove("top-[80px]"))
+      ? (setMenuButtonToggel(false), list.classList.remove("top-[56px]"))
       : (setMenuButtonToggel(true),
-        list.classList.add("top-[80px]"),
+        list.classList.add("top-[56px]"),
         list.classList.add("opacity-100"));
   }
 
@@ -51,7 +51,7 @@ function Header() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-bg_white_font"
               >
                 <path
                   strokeLinecap="round"
@@ -73,7 +73,7 @@ function Header() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 text-bg_white_font"
                 >
                   <path
                     strokeLinecap="round"
