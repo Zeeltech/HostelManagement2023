@@ -22,7 +22,6 @@ const addFood = async (req, res) => {
     });
 
     return res.status(200).json(foodDoc);
-
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
@@ -30,22 +29,36 @@ const addFood = async (req, res) => {
 };
 
 /* GET ALL FOOD */
-const getFoods = async (req,res) => {
+const getFoods = async (req, res) => {
   try {
-    const foodItems = await Food.find({})
-    if(foodItems){
-      return res.status(200).json(foodItems)
+    const foodItems = await Food.find({});
+    if (foodItems) {
+      return res.status(200).json(foodItems);
     }
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
   }
-}
+};
+
+/* GET A FOOD */
+const getFood = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const foodItems = await Food.findById(id);
+    if (foodItems) {
+      return res.status(200).json(foodItems);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
 
 /* EDIT FOOD */
 const editFood = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const { name } = req.body;
     let foodPhotoName;
 
@@ -53,19 +66,18 @@ const editFood = async (req, res) => {
       foodPhotoName = req.file.filename;
     }
 
-    const foodDoc = await Food.findById(id); 
+    const foodDoc = await Food.findById(id);
 
     if (!foodDoc) {
       return res.status(404).json({ message: "Food does not exists" });
     }
 
-    await foodDoc.set({
+    foodDoc.set({
       name,
-      photo:foodPhotoName,
+      photo: foodPhotoName,
     });
     await foodDoc.save();
     res.status(200).json(foodDoc);
-
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
@@ -73,29 +85,27 @@ const editFood = async (req, res) => {
 };
 
 /* DELETE FOOD */
-const deleteFood = async (req,res) => {
+const deleteFood = async (req, res) => {
   try {
-      const {id} = req.params;
-      const foodDoc = await Food.findById(id);
+    const { id } = req.params;
+    const foodDoc = await Food.findById(id);
 
-      if(!foodDoc){
-          return res.status(404).json({ message: "Food does not exists" });
-      }
+    if (!foodDoc) {
+      return res.status(404).json({ message: "Food does not exists" });
+    }
 
-      console.log(foodDoc);
-      await Food.deleteOne({ _id: id });
-      return res.status(200).json({message: "Food deleted"})
-
-
+    await Food.deleteOne({ _id: id });
+    return res.status(200).json({ message: "Food deleted" });
   } catch (error) {
-      console.log(error);
-  return res.json({ message: `Error occured ${error}` });
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
   }
-}
+};
 
 module.exports = {
-    addFood,
-    getFoods,
-    deleteFood,
-    editFood,
-}
+  addFood,
+  getFoods,
+  deleteFood,
+  editFood,
+  getFood,
+};

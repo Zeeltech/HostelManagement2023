@@ -14,7 +14,6 @@ function UserLogin() {
 
   if (user) {
     if (user.role == "Student") {
-      console.log(user);
       return <Navigate to="/student/dashboard" />;
     } else if (user.role == "Rector") {
       return <Navigate to="/rector/dashboard" />;

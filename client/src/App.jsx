@@ -9,6 +9,9 @@ import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
+import AddFood from "./pages/Rector/Food/AddFood";
+import AllFoods from "./pages/Rector/Food/AllFoods";
+import EditFood from "./pages/Rector/Food/EditFood";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -27,6 +30,9 @@ function App() {
           />
           <Route path="/rector/dashboard" element={<RectorDashboard />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/rector/addfood" element={<AddFood />} />
+          <Route path="/rector/allfoods" element={<AllFoods />} />
+          <Route path="/rector/allfoods/:id" element={<EditFood />} />
         </Route>
       </Routes>
     </UserContextProvider>
