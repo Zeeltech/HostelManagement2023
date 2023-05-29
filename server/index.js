@@ -12,7 +12,8 @@ const accountantRouter = require("./routes/accountantRoutes");
 const rectorRouter = require("./routes/rectorRoutes");
 const studentRouter = require("./routes/studentRoutes");
 const foodRouter = require("./routes/foodRoutes");
-const mealRouter = require("./routes/mealRoutes")
+const mealRouter = require("./routes/mealRoutes");
+const userRouter = require("./routes/userRoutes");
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -40,8 +41,9 @@ app.listen(PORT, () =>
 connectDB();
 
 /* APIs */
-app.use("/accountant", accountantRouter);
+app.use("/", userRouter);
+/* app.use("/accountant", accountantRouter);
 app.use("/rector", rectorRouter);
-app.use("/student", studentRouter);
+app.use("/student", studentRouter); */
 app.use("/food", foodRouter);
-app.use("/meal",mealRouter)
+app.use("/meal", mealRouter);

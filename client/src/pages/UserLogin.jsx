@@ -3,23 +3,37 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../../UserContext";
 
-function AccountantLogin() {
+function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  async function loginAccountant(ev) {
+  const { user, setUser } = useContext(UserContext);
+
+  if (user) {
+    if (user.role == "Student") {
+      console.log(user);
+      return <Navigate to="/student/dashboard" />;
+    } else if (user.role == "Rector") {
+      return <Navigate to="/rector/dashboard" />;
+    } else if (user.role == "Accountant") {
+      return <Navigate to="/accountant/dashboard" />;
+    }
+  }
+
+  async function loginUser(ev) {
     ev.preventDefault();
     if (email === "" || password === "" || confirmPassword === "") {
       toast.error("Please fill all fields");
     } else if (password !== confirmPassword) {
-      toast.error("Confirm password is not matched with password");
+      toast.error("Passwords do not match");
     } else {
       try {
         await axios
           .post(
-            "/accountant/login",
+            "/login",
             {
               email,
               password,
@@ -28,12 +42,22 @@ function AccountantLogin() {
           )
           .then((res) => {
             if (res.status === 201) {
-              toast.success("Login successful");
+              setUser(res.data);
+              if (user) {
+                if (user.role == "Student") {
+                  console.log("Yes");
+                  return <Navigate to="/student/dashboard" />;
+                } else if (user.role == "Rector") {
+                  return <Navigate to="/rector/dashboard" />;
+                } else if (user.role == "Accountant") {
+                  return <Navigate to="/accountant/dashboard" />;
+                }
+              }
             }
           });
       } catch (err) {
         if (err.response.status === 401)
-          toast.error("Email or Password incorrect");
+          toast.error("Provide correct credentials");
         else if (err.response.status === 404)
           toast.error("User does not exists");
         console.log(err);
@@ -46,10 +70,10 @@ function AccountantLogin() {
       <ToastContainer />
       <div className="give-height flex justify-center items-center mt-24 text-bg_white_font font-semibold text-sm">
         <form
-          onSubmit={loginAccountant}
+          onSubmit={loginUser}
           className="bg-bg_white text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2"
         >
-          <div className="text-xl mb-4">Login for Accountant</div>
+          <div className="text-xl mb-4">Log In</div>
 
           <div className="w-full">
             Email
@@ -94,7 +118,7 @@ function AccountantLogin() {
           <button className="btn">Login</button>
           <div>
             Don't have an account yet?{" "}
-            <Link to={"/accountant/register"} className="text-blue-600 ">
+            <Link to={"/user/register"} className="text-blue-600 ">
               Register here
             </Link>
           </div>
@@ -104,4 +128,4 @@ function AccountantLogin() {
   );
 }
 
-export default AccountantLogin;
+export default UserLogin;
