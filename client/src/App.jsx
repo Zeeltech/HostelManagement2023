@@ -9,6 +9,7 @@ import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
+import StudentProfile from "./pages/Student/StudentProfile";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -27,6 +28,7 @@ function App() {
           />
           <Route path="/rector/dashboard" element={<RectorDashboard />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
         </Route>
       </Routes>
     </UserContextProvider>

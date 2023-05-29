@@ -12,6 +12,8 @@ const {
   loginUser,
   logoutUser,
   getProfile,
+  userProfilePhotoUpdate,
+  updateStudentProfile,
 } = require("../controllers/userController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -47,5 +49,12 @@ router.post("/register", upload.single("profilePhoto"), registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/profile", protectUser, getProfile);
+router.put(
+  "/student-profile-photo-update",
+  protectUser,
+  upload.single("profilePhoto"),
+  userProfilePhotoUpdate
+);
+router.put("/update-student-profile/:id",protectUser,updateStudentProfile)
 
 module.exports = router;
