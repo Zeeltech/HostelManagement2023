@@ -78,9 +78,9 @@ const loginUser = async (req, res) => {
 /* LOGOUT */
 const logoutUser = (req, res) => {
   try {
-    const { userToken } = req.cookies;
-    if (userToken) {
-      res.status(201).clearCookie("userToken").json(true);
+    const { _token } = req.cookies;
+    if (_token) {
+      res.status(201).clearCookie("_token").json(true);
     } else {
       res.status(404).json(false);
     }
@@ -100,9 +100,63 @@ const getProfile = (req, res) => {
   }
 };
 
+/* USER PROFILE PHOTO UPDATE*/
+const userProfilePhotoUpdate = async (req, res) => {
+  try {
+    let profilePhoto;
+
+    if (req.file) {
+      profilePhoto = req.file.filename;
+    }
+
+    const userDoc = await User.findById(req.user._id);
+    if(userDoc){
+      userDoc.set({
+        profilePhoto,
+      });
+      await userDoc.save();
+      res.json("Photo uploaded");
+    }
+    else{
+      res.status(404).json({message: "User not found"})
+    }
+
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
+
+/* UPDATE STIDENT PROFILE */
+const updateStudentProfile = async (req,res)=>{
+  try {
+    const {id} = req.params;
+    const {name,phone} = req.body;
+
+    const studentDoc = await User.findById(id)
+
+    if(!studentDoc){
+      return res.status(400).json({message: "User does not exists"})
+    }
+    
+    await studentDoc.set({
+      name,
+      phone,
+    });
+    await studentDoc.save();
+    res.status(200).json(studentDoc);
+
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   getProfile,
+  userProfilePhotoUpdate,
+  updateStudentProfile,
 };

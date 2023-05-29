@@ -12,6 +12,8 @@ const {
   loginUser,
   logoutUser,
   getProfile,
+  userProfilePhotoUpdate,
+  updateStudentProfile,
 } = require("../controllers/userController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -46,6 +48,17 @@ const upload = multer({
 router.post("/register", upload.single("profilePhoto"), registerUser);
 router.post("/login", loginUser);
 
+
+
+router.put(
+  "/student-profile-photo-update",
+  protectUser,
+  upload.single("profilePhoto"),
+  userProfilePhotoUpdate
+);
+router.put("/update-student-profile/:id",protectUser,updateStudentProfile)
+
+
 router.post(
   "/logout",
   (req, res, next) => protectUser(req, res, next),
@@ -56,5 +69,6 @@ router.get(
   (req, res, next) => protectUser(req, res, next),
   getProfile
 );
+
 
 module.exports = router;

@@ -32,7 +32,9 @@ app.use(
 );
 app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
+
 app.use("/uploadsFood", express.static(__dirname + "/uploadsFood"));
+
 
 /* STARTUP */
 app.listen(PORT, () =>
