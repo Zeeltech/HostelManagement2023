@@ -10,8 +10,9 @@
 ** AC AND NON AC ROOMS **
 ** Video call **
 ** Leave and scan **
-** 
 ** Fine if something broken **
+** Password complex **
+** Delete photos from uploads **
 
     => Rector   => Everyday food - [Add new item + see previous items] - Update menu
                 => Notice to everyone - [Banner] - Notice
@@ -35,3 +36,10 @@
                 => Sign Up -> Name, Email, Photo, Phone no, Password, Roll no. Signup => Only allow if rector allows
 
 => Login and Signup
+
+// api protect krva
+// Pages protect karva
+// Redirections
+// Show photo
+
+// APIs => Open for all, Open for specific type, Open for only 3 types

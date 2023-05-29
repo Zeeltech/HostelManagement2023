@@ -12,7 +12,9 @@ const {
   getFoods,
   deleteFood,
   editFood,
+  getFood,
 } = require("../controllers/foodController");
+const { protectUser } = require("../middlewares/userProtect");
 
 /* MULTER CONFIGURATIONS */
 const storage = multer.diskStorage({
@@ -42,9 +44,32 @@ const upload = multer({
 });
 
 /* APIs */
-router.post("/add-food", upload.single("foodPhotoName"), addFood);
-router.get("/get-foods", getFoods);
-router.put("/edit-food/:id", upload.single("foodPhotoName"),editFood);
-router.delete("/delete-food/:id", deleteFood);
+router.post(
+  "/add-food",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  upload.single("photo"),
+  addFood
+);
+router.get(
+  "/get-foods",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  getFoods
+);
+router.put(
+  "/edit-food/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  upload.single("photo"),
+  editFood
+);
+router.delete(
+  "/delete-food/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  deleteFood
+);
+router.get(
+  "/get-food/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  getFood
+);
 
 module.exports = router;

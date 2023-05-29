@@ -45,7 +45,16 @@ const upload = multer({
 /* APIs */
 router.post("/register", upload.single("profilePhoto"), registerUser);
 router.post("/login", loginUser);
-router.post("/logout", logoutUser);
-router.get("/profile", protectUser, getProfile);
+
+router.post(
+  "/logout",
+  (req, res, next) => protectUser(req, res, next),
+  logoutUser
+);
+router.get(
+  "/profile",
+  (req, res, next) => protectUser(req, res, next),
+  getProfile
+);
 
 module.exports = router;
