@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { UserContext } from "../../UserContext";
+import Header from "../components/Header";
 
 function UserRegister() {
   const [name, setName] = useState("");
@@ -13,7 +15,13 @@ function UserRegister() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+  const { user, setUser } = useContext(UserContext);
+
   if (redirect) {
+    return <Navigate to="/login" />;
+  }
+
+  if (user) {
     return <Navigate to="/login" />;
   }
 
@@ -59,6 +67,7 @@ function UserRegister() {
 
   return (
     <>
+      <Header />
       <ToastContainer />
       <div className="give-height flex justify-center items-center mt-6 text-bg_white_font font-semibold text-sm">
         <form

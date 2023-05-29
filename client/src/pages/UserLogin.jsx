@@ -4,6 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../UserContext";
+import Header from "../components/Header";
 
 function UserLogin() {
   const [email, setEmail] = useState("");
@@ -14,7 +15,6 @@ function UserLogin() {
 
   if (user) {
     if (user.role == "Student") {
-      console.log(user);
       return <Navigate to="/student/dashboard" />;
     } else if (user.role == "Rector") {
       return <Navigate to="/rector/dashboard" />;
@@ -67,6 +67,7 @@ function UserLogin() {
 
   return (
     <>
+      <Header />
       <ToastContainer />
       <div className="give-height flex justify-center items-center mt-24 text-bg_white_font font-semibold text-sm">
         <form
