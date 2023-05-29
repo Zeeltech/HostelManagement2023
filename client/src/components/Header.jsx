@@ -91,13 +91,6 @@ function Header() {
           </header>
         </div>
       )}
-      <div>
-        {/* before log in */}
-        {/* After login */}
-        {user && user.role === "Rector" && <RectorSidebar />}
-        {user && user.role === "Accountant" && <AccountantNavbar />}
-        {user && user.role === "Student" && <StudentSidebar />}
-      </div>
     </>
   );
 }
