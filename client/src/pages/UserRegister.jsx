@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-function StudentSignup() {
+function UserRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  async function registerStudent(ev) {
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
+
+  async function registerUser(ev) {
     ev.preventDefault();
     if (
       name === "" ||
@@ -24,7 +29,7 @@ function StudentSignup() {
     ) {
       toast.error("Please fill all fields");
     } else if (password !== confirmPassword) {
-      toast.error("Password and Confirm Password is not matched");
+      toast.error("Passwords do not match");
     } else {
       try {
         const formData = new FormData();
@@ -36,11 +41,14 @@ function StudentSignup() {
         formData.append("phone", phone); // Add the phone field
 
         await axios
-          .post("/student/register", formData, {
+          .post("/register", formData, {
             headers: { "Content-type": "multipart/form-data" },
           })
           .then((res) => {
-            if (res.status === 200) toast.success("Registration Successfull");
+            if (res.status === 200) {
+              toast.success("Registration Successful");
+              setRedirect(true);
+            }
           });
       } catch (err) {
         if (err.response.status === 409) toast.error("User already exists");
@@ -54,10 +62,10 @@ function StudentSignup() {
       <ToastContainer />
       <div className="give-height flex justify-center items-center mt-6 text-bg_white_font font-semibold text-sm">
         <form
-          onSubmit={registerStudent}
+          onSubmit={registerUser}
           className="bg-bg_white text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2"
         >
-          <div className="text-xl mb-4">Create an account for Student</div>
+          <div className="text-xl mb-4">Register</div>
           <div className="w-full">
             Name
             <input
@@ -156,7 +164,7 @@ function StudentSignup() {
           <button className="btn">Create an account</button>
           <div>
             Already have an account?{" "}
-            <Link to={"/student/login"} className="text-blue-600 ">
+            <Link to={"/user/login"} className="text-blue-600 ">
               Login here
             </Link>
           </div>
@@ -166,4 +174,4 @@ function StudentSignup() {
   );
 }
 
-export default StudentSignup;
+export default UserRegister;
