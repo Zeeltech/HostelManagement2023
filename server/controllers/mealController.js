@@ -3,9 +3,17 @@ const Meal = require("../models/mealModel");
 /* ADD MEAL */
 const addMeal = async (req, res) => {
   try {
-    const { breakfast, lunch, dinner, date } = req.body;
+    const { breakfast, lunch, dinner } = req.body;
 
-    const mealExists = await Meal.findOne({ date });
+    const date = new Date().toLocaleDateString([], {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    await Meal.deleteMany({ date: { $ne: date } });
+
+    const mealExists = await Meal.findOne({ date: date });
 
     if (mealExists) {
       return res.status(409).json({ message: "Meal already exists" });
@@ -25,10 +33,17 @@ const addMeal = async (req, res) => {
   }
 };
 
-/* GET ALL MEALS */
+/* GET TODAY'S MEALS */
 const getMeals = async (req, res) => {
   try {
-    const mealIteams = await Meal.find({})
+    const today = new Date();
+    const date = today.toLocaleDateString([], {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const mealIteams = await Meal.find({ date: date })
       .populate("breakfast")
       .populate("lunch")
       .populate("dinner");
@@ -60,7 +75,6 @@ const editMeal = async (req, res) => {
     });
     await mealDoc.save();
     res.status(200).json(mealDoc);
-
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
@@ -68,29 +82,27 @@ const editMeal = async (req, res) => {
 };
 
 /* DELETE MEAL */
-const deleteMeal = async (req,res) => {
-    try {
-        const {id} = req.params;
-        const mealDoc = await Meal.findById(id);
+const deleteMeal = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const mealDoc = await Meal.findById(id);
 
-        if(!mealDoc){
-            return res.status(404).json({ message: "Meal does not exists" });
-        }
-
-        console.log(mealDoc);
-        await Meal.deleteOne({ _id: id });
-        return res.status(200).json({message: "Meal deleted"})
-
-
-    } catch (error) {
-        console.log(error);
-    return res.json({ message: `Error occured ${error}` });
+    if (!mealDoc) {
+      return res.status(404).json({ message: "Meal does not exists" });
     }
-}
+
+    console.log(mealDoc);
+    await Meal.deleteOne({ _id: id });
+    return res.status(200).json({ message: "Meal deleted" });
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occured ${error}` });
+  }
+};
 
 module.exports = {
   addMeal,
   getMeals,
   editMeal,
-  deleteMeal
+  deleteMeal,
 };

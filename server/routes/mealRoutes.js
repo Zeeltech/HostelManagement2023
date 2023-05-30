@@ -10,11 +10,28 @@ const {
   editMeal,
   deleteMeal,
 } = require("../controllers/mealController");
+const { protectUser } = require("../middlewares/userProtect");
 
 /* APIs */
-router.post("/add-meal", addMeal);
-router.get("/get-meals", getMeals);
-router.put("/edit-meal/:id", editMeal);
-router.delete("/delete-meal/:id",deleteMeal)
+router.post(
+  "/add-meal",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  addMeal
+);
+router.get(
+  "/get-meal",
+  (req, res, next) => protectUser(req, res, next),
+  getMeals
+);
+router.put(
+  "/edit-meal/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  editMeal
+);
+router.delete(
+  "/delete-meal/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  deleteMeal
+);
 
 module.exports = router;

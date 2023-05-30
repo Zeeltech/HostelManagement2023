@@ -56,13 +56,13 @@ function AddFoodPopUp() {
   return (
     <>
       <div className="" onClick={openModal}>
-        <div className="rounded-2xl object-cover aspect-square mb-2 border-2 border-bg_dark_section ">
+        <div className="rounded-2xl object-cover aspect-square mb-2 border-2 border-bg_dark_section hover:bg-bg_dark_section hover:text-bg_white">
           <div className="flex justify-center items-center h-full cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={2}
               stroke="currentColor"
               className="w-5 h-5"
             >
