@@ -2,7 +2,6 @@ const Food = require("../models/foodModel");
 const fs = require("fs");
 const path = require("path");
 
-
 /* ADD FOOD */
 const addFood = async (req, res) => {
   try {
