@@ -71,11 +71,16 @@ const editFood = async (req, res) => {
     if (!foodDoc) {
       return res.status(404).json({ message: "Food does not exists" });
     }
-
-    foodDoc.set({
-      name,
-      photo: foodPhotoName,
-    });
+    if (foodPhotoName) {
+      foodDoc.set({
+        name,
+        photo: foodPhotoName,
+      });
+    } else {
+      foodDoc.set({
+        name,
+      });
+    }
     await foodDoc.save();
     res.status(200).json(foodDoc);
   } catch (error) {

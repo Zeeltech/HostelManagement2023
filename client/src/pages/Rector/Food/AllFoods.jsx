@@ -1,12 +1,22 @@
 import { React, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
+import { UserContext } from "../../../../UserContext";
 import * as myConstants from "../../../../myConstants";
+import EditFoodPopUp from "./EditFoodPopUp";
+import AddFood from "./AddFoodPopUp";
 
 function AllFoods() {
   const [foods, setFoods] = useState([]);
+  const { user, setUser } = useContext(UserContext);
+
+  if (!user || (user && user.role !== "Rector")) {
+    return <Navigate to="/login" />;
+  }
+
   useEffect(() => {
     axios.get("/food/get-foods").then((res) => {
       setFoods(res.data);
@@ -31,7 +41,7 @@ function AllFoods() {
         {foods.length > 0 &&
           foods.map((food) => (
             <div className="relative" key={food._id}>
-              <Link to={"/rector/allfoods/" + food._id}>
+              <div>
                 <div className="rounded-2xl object-cover aspect-square mb-2 bg-gray-600">
                   {food.photo && (
                     <img
@@ -43,7 +53,7 @@ function AllFoods() {
                   )}
                 </div>
                 <h2 className="text-sm font-bold mb-1 truncate">{food.name}</h2>
-              </Link>
+              </div>
               <div className="absolute bottom-9 right-1 bg-bg_dark_font bg-opacity-80 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,8 +73,10 @@ function AllFoods() {
                   />
                 </svg>
               </div>
+              <EditFoodPopUp id={food._id} />
             </div>
           ))}
+        <AddFood />
       </div>
     </>
   );
