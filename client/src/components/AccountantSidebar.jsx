@@ -23,7 +23,7 @@ const AccountantNavbar = () => {
   ];
 
      /* LOGOUT */
-     async function logoutHandel(ev) {
+     async function logoutHandle(ev) {
       ev.preventDefault();
       await axios.post("/logout");
       setUser(null);
@@ -105,7 +105,7 @@ const AccountantNavbar = () => {
               Fine
             </span>
           </li>
-          <li onClick={logoutHandel} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li onClick={logoutHandle} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out

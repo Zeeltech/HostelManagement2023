@@ -22,7 +22,7 @@ const StudentSidebar = () => {
   ];
 
   /* LOGOUT */
-  async function logoutHandel(ev) {
+  async function logoutHandle(ev) {
     ev.preventDefault();
     await axios.post("/logout");
     setUser(null);
@@ -95,7 +95,7 @@ const StudentSidebar = () => {
             </span>
           </li>
           <li
-            onClick={logoutHandel}
+            onClick={logoutHandle}
             className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
           >
             <img className="h-6" src={logout} />
