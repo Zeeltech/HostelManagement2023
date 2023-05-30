@@ -8,10 +8,12 @@ import { UserContext } from "../../../../UserContext";
 import * as myConstants from "../../../../myConstants";
 import EditFoodPopUp from "./EditFoodPopUp";
 import AddFood from "./AddFoodPopUp";
+import Loader from "../../../components/Loader";
 
 function AllFoods() {
   const [foods, setFoods] = useState([]);
   const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
@@ -20,15 +22,23 @@ function AllFoods() {
   useEffect(() => {
     axios.get("/food/get-foods").then((res) => {
       setFoods(res.data);
+      setLoading(false);
     });
   }, [foods]);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   async function deleteFood(id) {
-    await axios.delete("/food/delete-food/" + id).then((res) => {
-      if (res.status === 200) {
-        toast.success("Deleted Successfully");
-      }
-    });
+    var a = confirm("Do you want to delete? ");
+    if (a) {
+      await axios.delete("/food/delete-food/" + id).then((res) => {
+        if (res.status === 200) {
+          toast.success("Deleted Successfully");
+        }
+      });
+    }
   }
 
   return (

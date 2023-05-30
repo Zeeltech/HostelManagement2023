@@ -25,7 +25,7 @@ const ProfileUpdatePopUp = () => {
     } else {
       try {
         await axios
-          .put(`/update-student-profile/${user._id}`, {
+          .put(`/update-profile/${user._id}`, {
             name,
             phone,
           })
@@ -90,12 +90,13 @@ const ProfileUpdatePopUp = () => {
                 />
               </div>
               <div className="flex justify-center gap-2">
-                <button onClick={closeModal} className="w-full bg-bg_red rounded-md py-2.5 px-4 text-bg_white  hover:scale-95 hover:bg-bg_dark_red duration-200">
+                <button
+                  onClick={closeModal}
+                  className="w-full bg-bg_red rounded-md py-2.5 px-4 text-bg_white  hover:scale-95 hover:bg-bg_dark_red duration-200"
+                >
                   Close
                 </button>
-                <button className="btn hover:bg-bg_dark_section">
-                  Submit
-                </button>
+                <button className="btn hover:bg-bg_dark_section">Submit</button>
               </div>
             </form>
           </div>
