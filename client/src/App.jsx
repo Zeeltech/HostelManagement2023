@@ -21,8 +21,6 @@ import RectorProfile from "./pages/Rector/RectorProfile";
 import AccountantProfile from "./pages/Accountant/AccountantProfile";
 
 
-import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
-import AddFoodPopUp from "./pages/Rector/Food/AddFoodPopUp";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
