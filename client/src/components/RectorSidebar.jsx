@@ -13,8 +13,13 @@ import axios from "axios";
 
 const RectorSidebar = () => {
   const [open, setOpen] = useState(true);
-  const [redirect, setRedirect] = useState("");
+
+  
+  
+
+ 
   const { setUser } = useContext(UserContext);
+
 
   const Menus = [
     { title: "Home", src: "home" },
@@ -24,17 +29,14 @@ const RectorSidebar = () => {
     { title: "Fine", src: "rupee" },
   ];
 
-  /*LOGOUT */
-  async function logoutHandel(ev) {
+   /* LOGOUT */
+   async function logoutHandel(ev) {
     ev.preventDefault();
     await axios.post("/logout");
     setUser(null);
-    setRedirect("/");
   }
 
-  if (redirect) {
-    return Navigate();
-  }
+
 
   return (
     <>
@@ -81,12 +83,12 @@ const RectorSidebar = () => {
           </h1>
         </div>
         <ul className="pt-6">
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link to={'/rector/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={user} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               My&nbsp;profile
             </span>
-          </li>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={home} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>

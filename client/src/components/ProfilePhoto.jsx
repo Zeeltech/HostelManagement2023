@@ -3,7 +3,7 @@ import { UserContext } from "../../UserContext";
 import * as myConst from "../../myConstants";
 import axios from "axios"
 
-function StudentProfilePhoto() {
+function ProfilePhoto() {
   const { user } = useContext(UserContext);
 
   async function photoHandler(ev) {
@@ -55,4 +55,4 @@ function StudentProfilePhoto() {
   );
 }
 
-export default StudentProfilePhoto;
+export default ProfilePhoto;

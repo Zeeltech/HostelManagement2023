@@ -3,16 +3,15 @@ import { UserContext } from "../../../UserContext";
 import { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader";
 import ProfilePhoto from "../../components/ProfilePhoto";
-import ProfileUpdatePopUp from "../../components/ProfileUpdatePopUp";
+import ProfileUpadePopUp from "../../components/ProfileUpdatePopUp";
 
-function StudentProfile() {
+function AccountantProfile() {
   const { user, setUser } = useContext(UserContext);
 
-  if (!user || (user && user.role !== "Student")) {
+  if (!user || (user && user.role !== "Accountant")) {
     return <Navigate to="/login" />;
-
   }
 
   /*LOGOUT */
@@ -30,14 +29,14 @@ function StudentProfile() {
           <div>{user.name}</div>
           <div>{user.email}</div>
           <div>{user.phone}</div>
-
-          <ProfileUpdatePopUp />
-          <button className="btn" onClick={logoutHandel}>Logout</button>
-
+          <ProfileUpadePopUp />
+          <button className="btn" onClick={logoutHandel}>
+            Logout
+          </button>
         </div>
       </div>
     </>
   );
 }
 
-export default StudentProfile;
+export default AccountantProfile;

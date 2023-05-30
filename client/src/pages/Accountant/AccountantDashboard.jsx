@@ -12,8 +12,7 @@ function AccountantDashboard() {
 
   return (
     <div>
-      <SideBar />
-      AccountantDashboard
+      Accountant dashboard
     </div>
   );
 }
