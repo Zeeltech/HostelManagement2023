@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
@@ -7,9 +7,13 @@ import home from "../assets/home.png";
 import report from "../assets/file.png";
 import fine from "../assets/rupee.png";
 import logout from "../assets/logout.png";
+import { UserContext } from "../../UserContext";
+import axios from "axios";
 
 const AccountantNavbar = () => {
   const [open, setOpen] = useState(true);
+  const {setUser} = useContext(UserContext)
+
   const Menus = [
     { title: "Home", src: "home" },
     { title: "My&nbsp;Profile", src: "user" },
@@ -17,6 +21,15 @@ const AccountantNavbar = () => {
     { title: "Report", src: "file" },
     { title: "Fine", src: "rupee" },
   ];
+
+     /* LOGOUT */
+     async function logoutHandel(ev) {
+      ev.preventDefault();
+      await axios.post("/logout");
+      setUser(null);
+    }
+
+    
   return (
     <div className="flex">
       <div
@@ -62,12 +75,12 @@ const AccountantNavbar = () => {
           </h1>
         </div>
         <ul className="pt-6">
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link to={'/accountant/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={user} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               My&nbsp;profile
             </span>
-          </li>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={home} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
@@ -92,7 +105,7 @@ const AccountantNavbar = () => {
               Fine
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li onClick={logoutHandel} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out
@@ -100,9 +113,7 @@ const AccountantNavbar = () => {
           </li>
         </ul>
       </div>
-      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <h1>Accountant Home page</h1>
-      </div>
+    
     </div>
   );
 };

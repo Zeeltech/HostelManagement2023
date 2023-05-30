@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
 import student from "../assets/stdnt.png";
@@ -7,9 +7,12 @@ import home from "../assets/home.png";
 import report from "../assets/file.png";
 import fine from "../assets/rupee.png";
 import logout from "../assets/logout.png";
+import { UserContext } from "../../UserContext";
+import axios from "axios";
 
 const StudentSidebar = () => {
   const [open, setOpen] = useState(true);
+  const { setUser } = useContext(UserContext);
   const Menus = [
     { title: "Home", src: "home" },
     { title: "My&nbsp;Profile", src: "user" },
@@ -17,6 +20,14 @@ const StudentSidebar = () => {
     { title: "Report", src: "file" },
     { title: "Fine", src: "rupee" },
   ];
+
+  /* LOGOUT */
+  async function logoutHandel(ev) {
+    ev.preventDefault();
+    await axios.post("/logout");
+    setUser(null);
+  }
+
   return (
     <div className="flex">
       <div
@@ -62,7 +73,10 @@ const StudentSidebar = () => {
           </h1>
         </div>
         <ul className="pt-6">
-          <Link to={'/student/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link
+            to={"/student/profile"}
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+          >
             <img className="h-6" src={user} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               My&nbsp;profile
@@ -80,7 +94,10 @@ const StudentSidebar = () => {
               Report
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li
+            onClick={logoutHandel}
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+          >
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out
@@ -88,7 +105,6 @@ const StudentSidebar = () => {
           </li>
         </ul>
       </div>
-     
     </div>
   );
 };

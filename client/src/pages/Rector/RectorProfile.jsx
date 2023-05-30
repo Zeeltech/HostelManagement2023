@@ -3,14 +3,15 @@ import { UserContext } from "../../../UserContext";
 import { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader";
 import ProfilePhoto from "../../components/ProfilePhoto";
 import ProfileUpadePopUp from "../../components/ProfileUpdatePopUp";
 
-function StudentProfile() {
+
+function RectorProfile() {
   const { user, setUser } = useContext(UserContext);
 
-  if (!user || (user && user.role !== "Student")) {
+  if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
   }
 
@@ -21,7 +22,6 @@ function StudentProfile() {
     setUser(null);
   }
 
-
   return (
     <>
       <div className="flex justify-center items-center give_height ">
@@ -31,13 +31,13 @@ function StudentProfile() {
           <div>{user.email}</div>
           <div>{user.phone}</div>
           <ProfileUpadePopUp />
-          <button className="btn" onClick={logoutHandel}>Logout</button>
+          <button className="btn" onClick={logoutHandel}>
+            Logout
+          </button>
         </div>
       </div>
     </>
   );
 }
 
-export default StudentProfile;
-
-
+export default RectorProfile;

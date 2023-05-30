@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 
-const StudentProfileUpdatePopUp = () => {
+const ProfileUpdatePopUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(UserContext);
   const [name, setName] = useState(user.name);
@@ -94,10 +94,10 @@ const StudentProfileUpdatePopUp = () => {
                 />
               </div>
               <div className="flex justify-center gap-2">
-                <button onClick={closeModal} className="btn">
+                <button onClick={closeModal} className="w-full bg-bg_red rounded-md py-2.5 px-4 text-bg_white  hover:scale-95 hover:bg-bg_dark_red duration-200">
                   Close
                 </button>
-                <button className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button className="btn hover:bg-bg_dark_section">
                   Submit
                 </button>
               </div>
@@ -109,4 +109,4 @@ const StudentProfileUpdatePopUp = () => {
   );
 };
 
-export default StudentProfileUpdatePopUp;
+export default ProfileUpdatePopUp;
