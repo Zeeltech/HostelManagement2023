@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+const path = require("path");
 
 /* SALT */
 const salt = bcrypt.genSaltSync(10);
@@ -109,6 +111,16 @@ const userProfilePhotoUpdate = async (req, res) => {
     }
 
     const userDoc = await User.findById(req.user._id);
+    // Delete previous profile photo
+    if (userDoc.profilePhoto) {
+      const filePath = path.join("uploads", userDoc.profilePhoto);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log("Error deleting previous profile photo:", err);
+        }
+      });
+    }
+
     if (userDoc) {
       userDoc.set({
         profilePhoto,
