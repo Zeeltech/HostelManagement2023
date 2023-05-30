@@ -7,11 +7,11 @@ import RectorSidebar from "./RectorSidebar";
 function SideBar() {
   const { user } = useContext(UserContext);
   return (
-    <div>
+    <>
       {user && user.role === "Rector" && <RectorSidebar />}
       {user && user.role === "Accountant" && <AccountantNavbar />}
       {user && user.role === "Student" && <StudentSidebar />}
-    </div>
+    </>
   );
 }
 

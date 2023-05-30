@@ -62,12 +62,12 @@ const StudentSidebar = () => {
           </h1>
         </div>
         <ul className="pt-6">
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link to={'/student/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={user} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               My&nbsp;profile
             </span>
-          </li>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={home} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
@@ -88,9 +88,7 @@ const StudentSidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <h1>Student Home page</h1>
-      </div>
+     
     </div>
   );
 };

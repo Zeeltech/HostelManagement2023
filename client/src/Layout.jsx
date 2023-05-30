@@ -24,9 +24,9 @@ function Layout() {
   }
 
   return (
-    <div>
+    <div className="flex">
       <SideBar />
-      <div>
+      <div className="flex-1 justify-center items-center mx-4">
         <Outlet />
       </div>
     </div>

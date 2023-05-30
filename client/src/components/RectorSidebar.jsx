@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
 import student from "../assets/stdnt.png";
@@ -7,9 +7,15 @@ import home from "../assets/home.png";
 import report from "../assets/file.png";
 import fine from "../assets/rupee.png";
 import logout from "../assets/logout.png";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
+import axios from "axios";
 
 const RectorSidebar = () => {
   const [open, setOpen] = useState(true);
+  const [redirect,setRedirect] = useState('');
+  const {setUser} = useContext(UserContext)
+  
   const Menus = [
     { title: "Home", src: "home" },
     { title: "My&nbsp;Profile", src: "user" },
@@ -17,8 +23,21 @@ const RectorSidebar = () => {
     { title: "Report", src: "file" },
     { title: "Fine", src: "rupee" },
   ];
+
+  /*LOGOUT */
+  async function logoutHandel(ev) {
+    ev.preventDefault();
+    await axios.post("/logout");
+    setUser(null);
+    setRedirect("/");
+  }
+
+  if(redirect){
+    return Navigate()
+  }
+
   return (
-    <div className="flex">
+    <>
       <div
         className={`${
           open ? "w-60" : "w-20"
@@ -92,7 +111,7 @@ const RectorSidebar = () => {
               Room&nbsp;allocation
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li onClick={logoutHandel} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out
@@ -100,10 +119,7 @@ const RectorSidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <h1>Rector Home page</h1>
-      </div>
-    </div>
+    </>
   );
 };
 

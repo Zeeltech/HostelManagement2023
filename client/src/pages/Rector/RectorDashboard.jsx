@@ -12,7 +12,6 @@ function RectorDashboard() {
   
   return (
     <div>
-      <SideBar />
       RectorDashboard
     </div>
   );
