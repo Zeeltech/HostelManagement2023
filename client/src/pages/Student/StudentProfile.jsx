@@ -5,13 +5,14 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Loader from "../../components/Loader"
 import ProfilePhoto from "../../components/ProfilePhoto";
-import ProfileUpadePopUp from "../../components/ProfileUpdatePopUp";
+import ProfileUpdatePopUp from "../../components/ProfileUpdatePopUp";
 
 function StudentProfile() {
   const { user, setUser } = useContext(UserContext);
 
   if (!user || (user && user.role !== "Student")) {
     return <Navigate to="/login" />;
+
   }
 
   /*LOGOUT */
@@ -21,7 +22,6 @@ function StudentProfile() {
     setUser(null);
   }
 
-
   return (
     <>
       <div className="flex justify-center items-center give_height ">
@@ -30,8 +30,10 @@ function StudentProfile() {
           <div>{user.name}</div>
           <div>{user.email}</div>
           <div>{user.phone}</div>
-          <ProfileUpadePopUp />
+
+          <ProfileUpdatePopUp />
           <button className="btn" onClick={logoutHandel}>Logout</button>
+
         </div>
       </div>
     </>
@@ -39,5 +41,3 @@ function StudentProfile() {
 }
 
 export default StudentProfile;
-
-

@@ -13,8 +13,14 @@ import axios from "axios";
 
 const RectorSidebar = () => {
   const [open, setOpen] = useState(true);
-  const {setUser} = useContext(UserContext)
+
   
+  
+
+ 
+  const { setUser } = useContext(UserContext);
+
+
   const Menus = [
     { title: "Home", src: "home" },
     { title: "My&nbsp;Profile", src: "user" },
@@ -89,12 +95,15 @@ const RectorSidebar = () => {
               Home
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link
+            to="/rector/allfoods"
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+          >
             <img className="h-6" src={student} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Food&nbsp;Menu
             </span>
-          </li>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={report} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
@@ -107,7 +116,10 @@ const RectorSidebar = () => {
               Room&nbsp;allocation
             </span>
           </li>
-          <li onClick={logoutHandel} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li
+            onClick={logoutHandel}
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+          >
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out
