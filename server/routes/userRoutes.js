@@ -50,7 +50,7 @@ router.post("/login", loginUser);
 
 router.put(
   "/student-profile-photo-update",
-  protectUser,
+  (req, res, next) => protectUser(req, res, next),
   upload.single("profilePhoto"),
   userProfilePhotoUpdate
 );

@@ -104,7 +104,6 @@ const getProfile = (req, res) => {
 const userProfilePhotoUpdate = async (req, res) => {
   try {
     let profilePhoto;
-
     if (req.file) {
       profilePhoto = req.file.filename;
     }
