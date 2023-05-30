@@ -82,6 +82,15 @@ const StudentSidebar = () => {
               My&nbsp;profile
             </span>
           </Link>
+          <Link
+            to={"/meal"}
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+          >
+            <img className="h-6" src={user} />
+            <span className={`${!open && "hidden"} origin-left duration-500`}>
+              Today's&nbsp;Meal
+            </span>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={home} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
