@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios'
+import axios from "axios";
 
 const StudentProfileUpdatePopUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,23 +24,19 @@ const StudentProfileUpdatePopUp = () => {
       toast.error("Please fill all fields");
     } else {
       try {
-        await axios.put(
-          `/update-student-profile/${user._id}`,
-          {
+        await axios
+          .put(`/update-student-profile/${user._id}`, {
             name,
             phone,
-          },
-        )
-        .then((res) => {
-          if(res.status==200){
-            setIsModalOpen(false)
-            window.location.reload(false);
-
-          }
-          else if(res.status===404){
-            toast.error('User not found')
-          }
-        });
+          })
+          .then((res) => {
+            if (res.status == 200) {
+              setIsModalOpen(false);
+              window.location.reload(false);
+            } else if (res.status === 404) {
+              toast.error("User not found");
+            }
+          });
       } catch (err) {}
     }
   }
@@ -53,7 +49,7 @@ const StudentProfileUpdatePopUp = () => {
       </button>
 
       {isModalOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded shadow">
             <h2 className="text-xl font-bold mb-4">Update Profile</h2>
             <form onSubmit={updateUser}>
