@@ -8,10 +8,12 @@ import { UserContext } from "../../../../UserContext";
 import * as myConstants from "../../../../myConstants";
 import EditFoodPopUp from "./EditFoodPopUp";
 import AddFood from "./AddFoodPopUp";
+import Loader from "../../../components/Loader";
 
 function AllFoods() {
   const [foods, setFoods] = useState([]);
   const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
@@ -20,15 +22,23 @@ function AllFoods() {
   useEffect(() => {
     axios.get("/food/get-foods").then((res) => {
       setFoods(res.data);
+      setLoading(false);
     });
   }, [foods]);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   async function deleteFood(id) {
-    await axios.delete("/food/delete-food/" + id).then((res) => {
-      if (res.status === 200) {
-        toast.success("Deleted Successfully");
-      }
-    });
+    var a = confirm("Do you want to delete? ");
+    if (a) {
+      await axios.delete("/food/delete-food/" + id).then((res) => {
+        if (res.status === 200) {
+          toast.success("Deleted Successfully");
+        }
+      });
+    }
   }
 
   return (
@@ -54,7 +64,7 @@ function AllFoods() {
                 </div>
                 <h2 className="text-sm font-bold mb-1 truncate">{food.name}</h2>
               </div>
-              <div className="absolute bottom-9 right-1 bg-bg_dark_font bg-opacity-80 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer">
+              <div className="absolute bottom-9 right-1 bg-bg_dark_font bg-opacity-80 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -14,6 +14,7 @@ const studentRouter = require("./routes/studentRoutes");
 const foodRouter = require("./routes/foodRoutes");
 const mealRouter = require("./routes/mealRoutes");
 const userRouter = require("./routes/userRoutes");
+const noticeRouter = require("./routes/noticeRoutes")
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -50,3 +51,4 @@ app.use("/rector", rectorRouter);
 app.use("/student", studentRouter); */
 app.use("/food", foodRouter);
 app.use("/meal", mealRouter);
+app.use("/notice", noticeRouter);

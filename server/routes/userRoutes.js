@@ -13,7 +13,7 @@ const {
   logoutUser,
   getProfile,
   userProfilePhotoUpdate,
-  updateStudentProfile,
+  updateProfile,
 } = require("../controllers/userController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -49,12 +49,12 @@ router.post("/register", upload.single("profilePhoto"), registerUser);
 router.post("/login", loginUser);
 
 router.put(
-  "/student-profile-photo-update",
+  "/profile-photo-update",
   (req, res, next) => protectUser(req, res, next),
   upload.single("profilePhoto"),
   userProfilePhotoUpdate
 );
-router.put("/update-student-profile/:id", protectUser, updateStudentProfile);
+router.put("/update-profile/:id", protectUser, updateProfile);
 
 router.post(
   "/logout",

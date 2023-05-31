@@ -11,7 +11,7 @@ function ProfilePhoto() {
     const formData = new FormData();
     formData.append("profilePhoto", ev.target.files[0]);
     axios
-      .put("/student-profile-photo-update", formData, {
+      .put("/profile-photo-update", formData, {
         headers: { "Content-type": "multipart/form-data" },
       }) 
       .then((res) => {

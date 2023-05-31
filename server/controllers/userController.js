@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+const path = require("path");
 
 /* SALT */
 const salt = bcrypt.genSaltSync(10);
@@ -109,17 +111,25 @@ const userProfilePhotoUpdate = async (req, res) => {
     }
 
     const userDoc = await User.findById(req.user._id);
-    if(userDoc){
+    // Delete previous profile photo
+    if (userDoc.profilePhoto) {
+      const filePath = path.join("uploads", userDoc.profilePhoto);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log("Error deleting previous profile photo:", err);
+        }
+      });
+    }
+
+    if (userDoc) {
       userDoc.set({
         profilePhoto,
       });
       await userDoc.save();
       res.json("Photo uploaded");
+    } else {
+      res.status(404).json({ message: "User not found" });
     }
-    else{
-      res.status(404).json({message: "User not found"})
-    }
-
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
@@ -127,29 +137,28 @@ const userProfilePhotoUpdate = async (req, res) => {
 };
 
 /* UPDATE STIDENT PROFILE */
-const updateStudentProfile = async (req,res)=>{
+const updateProfile = async (req, res) => {
   try {
-    const {id} = req.params;
-    const {name,phone} = req.body;
+    const { id } = req.params;
+    const { name, phone } = req.body;
 
-    const studentDoc = await User.findById(id)
+    const studentDoc = await User.findById(id);
 
-    if(!studentDoc){
-      return res.status(400).json({message: "User does not exists"})
+    if (!studentDoc) {
+      return res.status(400).json({ message: "User does not exists" });
     }
-    
+
     await studentDoc.set({
       name,
       phone,
     });
     await studentDoc.save();
     res.status(200).json(studentDoc);
-
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occured ${error}` });
   }
-}
+};
 
 module.exports = {
   registerUser,
@@ -157,5 +166,5 @@ module.exports = {
   logoutUser,
   getProfile,
   userProfilePhotoUpdate,
-  updateStudentProfile,
+  updateProfile,
 };

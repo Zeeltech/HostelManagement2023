@@ -1,4 +1,6 @@
 const Food = require("../models/foodModel");
+const fs = require("fs");
+const path = require("path");
 
 /* ADD FOOD */
 const addFood = async (req, res) => {
@@ -71,6 +73,16 @@ const editFood = async (req, res) => {
     if (!foodDoc) {
       return res.status(404).json({ message: "Food does not exists" });
     }
+    // Delete previous food photo
+    if (foodDoc.photo) {
+      const filePath = path.join("uploadsFood", foodDoc.photo);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log("Error deleting previous profile photo:", err);
+        }
+      });
+    }
+
     if (foodPhotoName) {
       foodDoc.set({
         name,

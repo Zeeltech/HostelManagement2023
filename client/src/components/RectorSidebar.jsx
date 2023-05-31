@@ -26,7 +26,8 @@ const RectorSidebar = () => {
   ];
 
   /* LOGOUT */
-  async function logoutHandel(ev) {
+  async function logoutHandle(ev) {
+
     ev.preventDefault();
     await axios.post("/logout");
     setUser(null);
@@ -118,7 +119,23 @@ const RectorSidebar = () => {
               Food&nbsp;Menu
             </span>
           </Link>
+         
+
           <li
+            onClick={() => setSelectedItem("roomAllocation")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "roomAllocation"
+                ? "bg-white bg-opacity-20 rounded-md"
+                : ""
+            }`}
+          >
+            <img className="h-6" src={room} />
+                        <span className={`${!open && "hidden"} origin-left duration-500`}>
+              Room&nbsp;allocation
+            </span>
+          </li>
+            
+        <Link to={"/rector/allnotices"}
             onClick={() => setSelectedItem("notice")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
               selectedItem === "notice"
@@ -130,22 +147,10 @@ const RectorSidebar = () => {
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Notice
             </span>
-          </li>
+          </Link>
+
           <li
-            onClick={() => setSelectedItem("roomAllocation")}
-            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
-              selectedItem === "roomAllocation"
-                ? "bg-white bg-opacity-20 rounded-md"
-                : ""
-            }`}
-          >
-            <img className="h-6" src={room} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
-              Room&nbsp;allocation
-            </span>
-          </li>
-          <li
-            onClick={logoutHandel}
+            onClick={logoutHandle}
             className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
           >
             <img className="h-6" src={logout} />
