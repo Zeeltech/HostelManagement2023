@@ -2,34 +2,31 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
+import selected_user from "../assets/selected_user.png";
 import student from "../assets/stdnt.png";
+import selected_student from "../assets/selected_student.png";
 import home from "../assets/home.png";
+import selected_home from "../assets/selected_home.png";
 import report from "../assets/report.png";
+import selected_report from "../assets/selected_report.png";
 import fine from "../assets/fine.png";
+import selected_fine from "../assets/selected_fine.png";
 import logout from "../assets/logout.png";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const AccountantNavbar = () => {
   const [open, setOpen] = useState(true);
-  const {setUser} = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const Menus = [
-    { title: "Home", src: "home" },
-    { title: "My&nbsp;Profile", src: "user" },
-    { title: "Student&nbsp;info", src: "stdnt" },
-    { title: "Report", src: "file" },
-    { title: "Fine", src: "rupee" },
-  ];
+  /* LOGOUT */
+  async function logoutHandle(ev) {
+    ev.preventDefault();
+    await axios.post("/logout");
+    setUser(null);
+  }
 
-     /* LOGOUT */
-     async function logoutHandle(ev) {
-      ev.preventDefault();
-      await axios.post("/logout");
-      setUser(null);
-    }
-
-    
   return (
     <div className="flex">
       <div
@@ -67,7 +64,7 @@ const AccountantNavbar = () => {
             alt=""
           />
           <h1
-            className={`text-lg font-semibold text-bg_white_font duration-300 origin-left ${
+            className={`text-lg font-semibold text-bg_white_font duration-300 origin-left hover:text-[#D90368] ${
               !open && "hidden"
             }`}
           >
@@ -75,37 +72,141 @@ const AccountantNavbar = () => {
           </h1>
         </div>
         <ul className="pt-10">
-          <Link to={'/accountant/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={user} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <Link
+            to={"/accountant/profile"}
+            onClick={() => setSelectedItem("profile")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "profile"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "profile" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_user}
+              />
+            ) : (
+              <img className="h-6" src={user} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "profile"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               My&nbsp;profile
             </span>
           </Link>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={home} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <li
+            onClick={() => setSelectedItem("home")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "home"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "home" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_home}
+              />
+            ) : (
+              <img className="h-6" src={home} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "home"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Home
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={student} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <li
+            onClick={() => setSelectedItem("studentInfo")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "studentInfo"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "studentInfo" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_student}
+              />
+            ) : (
+              <img className="h-6" src={student} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "studentInfo"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Student&nbsp;Info
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={report} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <li
+            onClick={() => setSelectedItem("notice")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "notice"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "notice" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_report}
+              />
+            ) : (
+              <img className="h-6" src={report} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "notice"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Report
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={fine} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <li
+            onClick={() => setSelectedItem("fine")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "fine"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "fine" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_fine}
+              />
+            ) : (
+              <img className="h-6" src={fine} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "fine"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Fine
             </span>
           </li>
-          <li onClick={logoutHandle} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li
+            onClick={logoutHandle}
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75 rounded-md"
+          >
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Log&nbsp;out
@@ -113,7 +214,6 @@ const AccountantNavbar = () => {
           </li>
         </ul>
       </div>
-    
     </div>
   );
 };

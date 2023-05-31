@@ -2,8 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
+import selected_user from "../assets/selected_user.png";
 import home from "../assets/home.png";
+import selected_home from "../assets/selected_home.png";
 import report from "../assets/report.png";
+import selected_report from "../assets/selected_report.png";
+import food from "../assets/food.png";
+import selected_food from "../assets/selected_food.png";
 import logout from "../assets/logout.png";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
@@ -11,13 +16,7 @@ import axios from "axios";
 const StudentSidebar = () => {
   const [open, setOpen] = useState(true);
   const { setUser } = useContext(UserContext);
-  const Menus = [
-    { title: "Home", src: "home" },
-    { title: "My&nbsp;Profile", src: "user" },
-    { title: "Student&nbsp;info", src: "stdnt" },
-    { title: "Report", src: "file" },
-    { title: "Fine", src: "rupee" },
-  ];
+  const [selectedItem, setSelectedItem] = useState(null);
 
   /* LOGOUT */
   async function logoutHandle(ev) {
@@ -73,37 +72,113 @@ const StudentSidebar = () => {
         <ul className="pt-10">
           <Link
             to={"/student/profile"}
-            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+            onClick={() => setSelectedItem("profile")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "profile"
+                ? "bg-white duration-200"
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
           >
-            <img className="h-6" src={user} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+            {selectedItem === "profile" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_user}
+              />
+            ) : (
+              <img className="h-6" src={user} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "profile"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               My&nbsp;profile
             </span>
           </Link>
-          <Link
+          <li
             to={"/meal"}
-            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+            onClick={() => setSelectedItem("meal")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "meal"
+                ? "bg-white duration-200"
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
           >
-            <img className="h-6" src={user} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+            {selectedItem === "meal" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_food}
+              />
+            ) : (
+              <img className="h-6" src={food} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "meal"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Today's&nbsp;Meal
             </span>
-          </Link>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={home} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          </li>
+          <li
+            onClick={() => setSelectedItem("home")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "home"
+                ? "bg-white duration-200"
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "home" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_home}
+              />
+            ) : (
+              <img className="h-6" src={home} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "home"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Home
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={report} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+          <li
+            onClick={() => setSelectedItem("notice")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "notice"
+                ? "bg-white duration-200"
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "notice" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_report}
+              />
+            ) : (
+              <img className="h-6" src={report} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "notice"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
               Report
             </span>
           </li>
           <li
             onClick={logoutHandle}
-            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75 rounded-md"
           >
             <img className="h-6" src={logout} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
