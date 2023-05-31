@@ -64,7 +64,7 @@ function AllFoods() {
                 </div>
                 <h2 className="text-sm font-bold mb-1 truncate">{food.name}</h2>
               </div>
-              <div className="absolute bottom-9 right-1 bg-bg_dark_font bg-opacity-80 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer">
+              <div className="absolute bottom-9 right-1 bg-bg_dark_font bg-opacity-80 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
