@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
-import student from "../assets/stdnt.png";
+import food from "../assets/food.png";
 import home from "../assets/home.png";
-import report from "../assets/file.png";
-import fine from "../assets/rupee.png";
+import report from "../assets/report.png";
+import room from "../assets/room.png";
 import logout from "../assets/logout.png";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
@@ -13,13 +13,9 @@ import axios from "axios";
 
 const RectorSidebar = () => {
   const [open, setOpen] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  
-  
-
- 
   const { setUser } = useContext(UserContext);
-
 
   const Menus = [
     { title: "Home", src: "home" },
@@ -29,14 +25,12 @@ const RectorSidebar = () => {
     { title: "Fine", src: "rupee" },
   ];
 
-   /* LOGOUT */
-   async function logoutHandel(ev) {
+  /* LOGOUT */
+  async function logoutHandel(ev) {
     ev.preventDefault();
     await axios.post("/logout");
     setUser(null);
   }
-
-
 
   return (
     <>
@@ -66,7 +60,7 @@ const RectorSidebar = () => {
             />
           </svg>
         </div>
-        <div className="flex gap-x-3 items-center ml-2">
+        <div className="flex gap-x-3 items-center ml-2 cursor-pointer">
           <img
             className={`h-6 border-2 border-bg_white bg-bg_white rounded-xl duration-500 ${
               open && "rotate-[360deg]"
@@ -75,21 +69,36 @@ const RectorSidebar = () => {
             alt=""
           />
           <h1
-            className={`text-lg font-semibold text-bg_white_font duration-300 origin-left ${
+            className={`text-lg font-semibold text-bg_white_font duration-300 origin-left hover:text-bg_dark_red ${
               !open && "hidden"
             }`}
           >
             APC&nbsp;Nadiad
           </h1>
         </div>
-        <ul className="pt-6">
-          <Link to={'/rector/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+        <ul className="pt-10">
+          <Link
+            to={"/rector/profile"}
+            onClick={() => setSelectedItem("profile")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "profile"
+                ? "bg-white bg-opacity-20 rounded-md text-bg_dark_red"
+                : ""
+            }`}
+          >
             <img className="h-6" src={user} />
-            <span className={`${!open && "hidden"} origin-left duration-500`}>
+            <span className={`${!open && "hidden"} origin-left duration-75`}>
               My&nbsp;profile
             </span>
           </Link>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li
+            onClick={() => setSelectedItem("home")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "home"
+                ? "bg-white bg-opacity-20 rounded-md duration-500 "
+                : ""
+            }`}
+          >
             <img className="h-6" src={home} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Home
@@ -97,21 +106,40 @@ const RectorSidebar = () => {
           </li>
           <Link
             to="/rector/allfoods"
-            className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+            onClick={() => setSelectedItem("foodMenu")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "foodMenu"
+                ? "bg-white bg-opacity-20 rounded-md"
+                : ""
+            }`}
           >
-            <img className="h-6" src={student} />
+            <img className="h-6" src={food} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Food&nbsp;Menu
             </span>
           </Link>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <li
+            onClick={() => setSelectedItem("notice")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "notice"
+                ? "bg-white bg-opacity-20 rounded-md"
+                : ""
+            }`}
+          >
             <img className="h-6" src={report} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Notice
             </span>
           </li>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
-            <img className="h-6" src={fine} />
+          <li
+            onClick={() => setSelectedItem("roomAllocation")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              selectedItem === "roomAllocation"
+                ? "bg-white bg-opacity-20 rounded-md"
+                : ""
+            }`}
+          >
+            <img className="h-6" src={room} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Room&nbsp;allocation
             </span>
