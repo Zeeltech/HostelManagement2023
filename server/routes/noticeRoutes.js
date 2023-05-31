@@ -11,12 +11,33 @@ const {
   deleteNotice,
   getNotice,
 } = require("../controllers/noticeController");
+const { protectUser } = require("../middlewares/userProtect");
 
 /* APIs */
-router.post("/add-notice", addNotice);
-router.put("/edit-notice/:id", editNotice);
-router.get("/get-notices", getAllNotices);
-router.delete("/delete-notice/:id", deleteNotice);
-router.get("/get-notice/:id",getNotice)
+router.post(
+  "/add-notice",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  addNotice
+);
+router.put(
+  "/edit-notice/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  editNotice
+);
+router.get(
+  "/get-notices",
+  (req, res, next) => protectUser(req, res, next),
+  getAllNotices
+);
+router.delete(
+  "/delete-notice/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  deleteNotice
+);
+router.get(
+  "/get-notice/:id",
+  (req, res, next) => protectUser(req, res, next),
+  getNotice
+);
 
 module.exports = router;
