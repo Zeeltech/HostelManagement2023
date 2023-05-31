@@ -13,10 +13,20 @@ const addMeal = async (req, res) => {
 
     await Meal.deleteMany({ date: { $ne: date } });
 
-    const mealExists = await Meal.findOne({ date: date });
+    var mealExists = await Meal.findOne({ date: date });
 
     if (mealExists) {
-      return res.status(409).json({ message: "Meal already exists" });
+      breakfast == null
+        ? (mealExists.breakfast = mealExists.breakfast)
+        : (mealExists.breakfast = breakfast);
+      lunch == null
+        ? (mealExists.lunch = mealExists.lunch)
+        : (mealExists.lunch = lunch);
+      dinner == null
+        ? (mealExists.dinner = mealExists.dinner)
+        : (mealExists.dinner = dinner);
+      mealExists = await mealExists.save();
+      return res.status(200).json(mealExists);
     }
 
     const mealDoc = await Meal.create({
@@ -43,7 +53,7 @@ const getMeals = async (req, res) => {
       day: "numeric",
     });
 
-    const mealIteams = await Meal.find({ date: date })
+    const mealIteams = await Meal.findOne({ date: date })
       .populate("breakfast")
       .populate("lunch")
       .populate("dinner");
