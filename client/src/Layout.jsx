@@ -24,12 +24,19 @@ function Layout() {
   }
 
   return (
-    <div className="flex">
-      <SideBar />
-      <div className="flex-1 justify-center items-center mx-4">
-        <Outlet />
+    <>
+      <div className="md:flex hidden">
+        <SideBar />
+        <div className="flex-1 justify-center items-center mx-4">
+          <Outlet />
+        </div>
       </div>
-    </div>
+      <div className="md:hidden block">
+        <div className="flex-1 justify-center items-center mx-4">
+          <Outlet />
+        </div>
+      </div>
+    </>
   );
 }
 
