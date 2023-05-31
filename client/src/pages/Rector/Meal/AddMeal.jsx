@@ -24,6 +24,7 @@ function AddMeal() {
       setBreakfast(res.data.breakfast);
       setLunch(res.data.lunch);
       setDinner(res.data.dinner);
+      console.log("Here");
       setLoading(false);
     });
   }, []);

@@ -5,7 +5,7 @@ const addMeal = async (req, res) => {
   try {
     const { breakfast, lunch, dinner } = req.body;
 
-    const date = new Date().toLocaleDateString([], {
+    const date = new Date().toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -47,7 +47,7 @@ const addMeal = async (req, res) => {
 const getMeals = async (req, res) => {
   try {
     const today = new Date();
-    const date = today.toLocaleDateString([], {
+    const date = today.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -57,8 +57,12 @@ const getMeals = async (req, res) => {
       .populate("breakfast")
       .populate("lunch")
       .populate("dinner");
+
+    console.log(date);
     if (mealIteams) {
       return res.status(200).json(mealIteams);
+    } else {
+      return res.status(200).json({ breakfast: [], lunch: [], dinner: [] });
     }
   } catch (error) {
     console.log(error);
