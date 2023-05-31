@@ -17,7 +17,7 @@ import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
 import StudentProfile from "./pages/Student/StudentProfile";
 import RectorProfile from "./pages/Rector/RectorProfile";
 import AccountantProfile from "./pages/Accountant/AccountantProfile";
-import AddMeal from "./pages/Rector/Food/AddMeal";
+import AddMeal from "./pages/Rector/Meal/AddMeal";
 import TodayMeal from "./components/TodayMeal";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
