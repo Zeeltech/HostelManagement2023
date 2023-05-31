@@ -10,6 +10,7 @@ import { Navigate } from "react-router-dom";
 import AddNoticePopUp from "./AddNoticePopUp";
 import EditNoticePopUp from "./EditNoticePopUp";
 
+
 function AllNotices() {
   const [notices, setNotices] = useState([]);
   const { user, setUser } = useContext(UserContext);
@@ -88,7 +89,6 @@ function AllNotices() {
               <div>
                 <p>{notice.description}</p>
               </div>
-              {/* {isHovered && ( */}
                 <>
                   <div className="hidden group-hover:block absolute bottom-3 right-3 bg-bg_dark_font bg-opacity-40 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer">
                     <svg
@@ -111,7 +111,6 @@ function AllNotices() {
                   </div>
                   <EditNoticePopUp notice={notice} />
                 </>
-              {/* )} */}
             </div>
           ))}
       </div>
