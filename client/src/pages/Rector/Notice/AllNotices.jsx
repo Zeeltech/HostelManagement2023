@@ -59,7 +59,7 @@ function AllNotices() {
           notices.map((notice) => (
             <div
               key={notice._id}
-              className="flex flex-col gap-2 bg-bg_notice m-1 rounded-lg p-2 cursor-pointer relative group "
+              className="flex flex-col gap-2 bg-bg_notice m-1 rounded-lg p-2 cursor-pointer relative group break-words"
             
             >
               <div className="flex justify-between" >
