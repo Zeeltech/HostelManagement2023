@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
+import selected_user from "../assets/selected_user.png";
 import food from "../assets/food.png";
+import selected_food from "../assets/selected_food.png";
 import home from "../assets/home.png";
+import selected_home from "../assets/selected_home.png";
 import report from "../assets/report.png";
+import selected_report from "../assets/selected_report.png";
 import room from "../assets/room.png";
+import selected_room from "../assets/selected_room.png";
 import logout from "../assets/logout.png";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
@@ -16,14 +21,6 @@ const RectorSidebar = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const { setUser } = useContext(UserContext);
-
-  const Menus = [
-    { title: "Home", src: "home" },
-    { title: "My&nbsp;Profile", src: "user" },
-    { title: "Student&nbsp;info", src: "stdnt" },
-    { title: "Report", src: "file" },
-    { title: "Fine", src: "rupee" },
-  ];
 
   /* LOGOUT */
   async function logoutHandle(ev) {
@@ -70,7 +67,7 @@ const RectorSidebar = () => {
               alt=""
             />
             <h1
-              className={`text-lg font-semibold text-bg_white_font duration-300 origin-left hover:text-bg_dark_red ${
+              className={`text-lg font-semibold text-bg_white_font duration-300 origin-left hover:text-[#D90368] ${
                 !open && "hidden"
               }`}
             >
@@ -81,69 +78,137 @@ const RectorSidebar = () => {
             <Link
               to={"/rector/profile"}
               onClick={() => setSelectedItem("profile")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "profile"
-                  ? "bg-white bg-opacity-20 rounded-md text-bg_dark_red"
-                  : ""
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={user} />
-              <span className={`${!open && "hidden"} origin-left duration-75`}>
+              {selectedItem === "profile" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_user}
+                />
+              ) : (
+                <img className="h-6" src={user} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "profile"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 My&nbsp;profile
               </span>
             </Link>
+
             <li
               onClick={() => setSelectedItem("home")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "home"
-                  ? "bg-white bg-opacity-20 rounded-md duration-500 "
-                  : ""
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={home} />
-              <span className={`${!open && "hidden"} origin-left duration-500`}>
+              {selectedItem === "home" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_home}
+                />
+              ) : (
+                <img className="h-6" src={home} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "home"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 Home
               </span>
             </li>
+
             <Link
               to="/rector/allfoods"
               onClick={() => setSelectedItem("foodMenu")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "foodMenu"
-                  ? "bg-white bg-opacity-20 rounded-md"
-                  : ""
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={food} />
-              <span className={`${!open && "hidden"} origin-left duration-500`}>
+              {selectedItem === "foodMenu" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_food}
+                />
+              ) : (
+                <img className="h-6" src={food} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "foodMenu"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 Food&nbsp;Menu
               </span>
             </Link>
+
             <Link
               to="/rector/addmeal"
-              onClick={() => setSelectedItem("addMeal")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
-                selectedItem === "addMeal"
-                  ? "bg-white bg-opacity-20 rounded-md"
-                  : ""
+              onClick={() => setSelectedItem("addmeal")}
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+                selectedItem === "addmeal"
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={food} />
-              <span className={`${!open && "hidden"} origin-left duration-500`}>
+              {selectedItem === "addmeal" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_food}
+                />
+              ) : (
+                <img className="h-6" src={food} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "addmeal"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 Today's&nbsp;Meal
               </span>
             </Link>
 
             <li
               onClick={() => setSelectedItem("roomAllocation")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "roomAllocation"
-                  ? "bg-white bg-opacity-20 rounded-md"
-                  : ""
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={room} />
-              <span className={`${!open && "hidden"} origin-left duration-500`}>
+              {selectedItem === "roomAllocation" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_room}
+                />
+              ) : (
+                <img className="h-6" src={room} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "roomAllocation"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 Room&nbsp;allocation
               </span>
             </li>
@@ -151,21 +216,34 @@ const RectorSidebar = () => {
             <Link
               to={"/rector/allnotices"}
               onClick={() => setSelectedItem("notice")}
-              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md  ${
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "notice"
-                  ? "bg-white bg-opacity-20 rounded-md"
-                  : ""
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              <img className="h-6" src={report} />
-              <span className={`${!open && "hidden"} origin-left duration-500`}>
+              {selectedItem === "notice" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_report}
+                />
+              ) : (
+                <img className="h-6" src={report} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "notice"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
                 Notice
               </span>
             </Link>
 
             <li
               onClick={logoutHandle}
-              className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md"
+              className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75 rounded-md"
             >
               <img className="h-6" src={logout} />
               <span className={`${!open && "hidden"} origin-left duration-500`}>
