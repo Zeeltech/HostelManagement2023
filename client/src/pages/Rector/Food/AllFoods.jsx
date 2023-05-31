@@ -20,7 +20,7 @@ function AllFoods() {
       setFoods(res.data);
       setLoading(false);
     });
-  }, [foods]);
+  }, []);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
