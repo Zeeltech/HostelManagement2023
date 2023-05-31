@@ -100,12 +100,12 @@ const RectorSidebar = () => {
               Food&nbsp;Menu
             </span>
           </Link>
-          <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
+          <Link to={"/rector/allnotices"} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={report} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
               Notice
             </span>
-          </li>
+          </Link>
           <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={fine} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>

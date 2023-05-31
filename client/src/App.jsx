@@ -19,6 +19,7 @@ import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
 import StudentProfile from "./pages/Student/StudentProfile";
 import RectorProfile from "./pages/Rector/RectorProfile";
 import AccountantProfile from "./pages/Accountant/AccountantProfile";
+import AllNotices from "./pages/Rector/Notice/AllNotices";
 
 
 
@@ -46,6 +47,8 @@ function App() {
           <Route path="/rector/addfood" element={<AddFoodPopUp />} />
           <Route path="/rector/allfoods" element={<AllFoods />} />
           <Route path="/rector/allfoods/:id" element={<EditFoodPopUp />} />
+
+          <Route path="/rector/allnotices" element={<AllNotices/>}/>
 
         </Route>
       </Routes>
