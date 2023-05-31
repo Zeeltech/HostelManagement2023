@@ -17,8 +17,12 @@ import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
 import StudentProfile from "./pages/Student/StudentProfile";
 import RectorProfile from "./pages/Rector/RectorProfile";
 import AccountantProfile from "./pages/Accountant/AccountantProfile";
+
 import AddMeal from "./pages/Rector/Meal/AddMeal";
+import AllNotices from "./pages/Rector/Notice/AllNotices";
+
 import TodayMeal from "./components/TodayMeal";
+
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -48,7 +52,12 @@ function App() {
           <Route path="/rector/allfoods/:id" element={<EditFoodPopUp />} />
           <Route path="/rector/addmeal" element={<AddMeal />} />
 
+
+          <Route path="/rector/allnotices" element={<AllNotices/>}/>
+
+
           <Route path="/meal" element={<TodayMeal />} />
+
         </Route>
       </Routes>
     </UserContextProvider>

@@ -4,8 +4,8 @@ import logo from "../assets/logo2.png";
 import user from "../assets/user.png";
 import student from "../assets/stdnt.png";
 import home from "../assets/home.png";
-import report from "../assets/file.png";
-import fine from "../assets/rupee.png";
+import report from "../assets/report.png";
+import fine from "../assets/fine.png";
 import logout from "../assets/logout.png";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
@@ -74,7 +74,7 @@ const AccountantNavbar = () => {
             APC&nbsp;Nadiad
           </h1>
         </div>
-        <ul className="pt-6">
+        <ul className="pt-10">
           <Link to={'/accountant/profile'} className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 rounded-md">
             <img className="h-6" src={user} />
             <span className={`${!open && "hidden"} origin-left duration-500`}>
