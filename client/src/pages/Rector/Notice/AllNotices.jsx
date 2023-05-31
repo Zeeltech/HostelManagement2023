@@ -6,6 +6,7 @@ import Loader from "../../../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
+import { Navigate } from "react-router-dom";
 
 function AllNotices() {
   const [notices, setNotices] = useState([]);
@@ -19,6 +20,10 @@ function AllNotices() {
       setLoading(false);
     });
   }, [notices]);
+
+  if (!user || (user && user.role !== "Rector")) {
+    return <Navigate to="/login" />;
+  }
 
   if (loading) {
     return <Loader />;
@@ -83,9 +88,7 @@ function AllNotices() {
                 <p>{notice.description}</p>
               </div>
               {isHovered && (
-                <div
-                  className="absolute bottom-3 right-3 bg-bg_dark_font bg-opacity-40 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer"
-                >
+                <div className="absolute bottom-3 right-3 bg-bg_dark_font bg-opacity-40 text-white p-1 rounded-xl hover:bg-bg_red cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
