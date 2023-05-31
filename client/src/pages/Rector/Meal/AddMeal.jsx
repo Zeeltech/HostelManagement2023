@@ -3,6 +3,7 @@ import { UserContext } from "../../../../UserContext";
 import { Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import AllMealPopUp from "./AllMealPopUp";
 
 function AddMeal() {
   const { user, setUser } = useContext(UserContext);
@@ -15,7 +16,8 @@ function AddMeal() {
       <div className="flex justify-center mb-6 text-2xl font-bold labels max-w-md mx-auto">
         Breakfast
       </div>
-        
+      <AllMealPopUp />
+
       <div className="flex justify-center mb-6 text-2xl font-bold labels max-w-md mx-auto">
         Lunch
       </div>
