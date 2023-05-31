@@ -10,8 +10,6 @@ import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
 
-
-
 import AddFoodPopUp from "./pages/Rector/Food/AddFoodPopUp";
 import AllFoods from "./pages/Rector/Food/AllFoods";
 import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
@@ -19,9 +17,14 @@ import EditFoodPopUp from "./pages/Rector/Food/EditFoodPopUp";
 import StudentProfile from "./pages/Student/StudentProfile";
 import RectorProfile from "./pages/Rector/RectorProfile";
 import AccountantProfile from "./pages/Accountant/AccountantProfile";
+
 import AllNotices from "./pages/Rector/Notice/AllNotices";
 
 
+
+
+import AddMeal from "./pages/Rector/Food/AddMeal";
+import TodayMeal from "./components/TodayMeal";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
@@ -38,7 +41,10 @@ function App() {
 
           <Route path="/rector/dashboard" element={<RectorDashboard />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
-          <Route path="/accountant/dashboard" element={<AccountantDashboard />} />
+          <Route
+            path="/accountant/dashboard"
+            element={<AccountantDashboard />}
+          />
 
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/rector/profile" element={<RectorProfile />} />
@@ -47,8 +53,13 @@ function App() {
           <Route path="/rector/addfood" element={<AddFoodPopUp />} />
           <Route path="/rector/allfoods" element={<AllFoods />} />
           <Route path="/rector/allfoods/:id" element={<EditFoodPopUp />} />
+          <Route path="/rector/addmeal" element={<AddMeal />} />
+
 
           <Route path="/rector/allnotices" element={<AllNotices/>}/>
+
+
+          <Route path="/meal" element={<TodayMeal />} />
 
         </Route>
       </Routes>
