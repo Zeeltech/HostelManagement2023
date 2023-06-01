@@ -11,6 +11,8 @@ import report from "../assets/report.png";
 import selected_report from "../assets/selected_report.png";
 import room from "../assets/room.png";
 import selected_room from "../assets/selected_room.png";
+import food_menu from "../assets/food_menu.png";
+import selected_food_menu from "../assets/selected_food_menu.png";
 import logout from "../assets/logout.png";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
@@ -31,7 +33,7 @@ const RectorSidebar = () => {
 
   return (
     <>
-      <div className="sticky top-0 h-screen">
+      <div className="sticky top-0 h-screen mr-4">
         <div
           className={`${
             open ? "w-60" : "w-20"
@@ -142,10 +144,10 @@ const RectorSidebar = () => {
               {selectedItem === "foodMenu" ? (
                 <img
                   className={`h-6 rotate-[360deg] duration-500`}
-                  src={selected_food}
+                  src={selected_food_menu}
                 />
               ) : (
-                <img className="h-6" src={food} />
+                <img className="h-6" src={food_menu} />
               )}
               <span
                 className={`${!open && "hidden"} origin-left duration-75 ${

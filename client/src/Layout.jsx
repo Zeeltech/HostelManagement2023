@@ -6,6 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../UserContext";
 import Loader from "./components/Loader";
+import MobileHeader from "./components/MobileHeaders/MobileHeader";
 
 function Layout() {
   const { user, setUser } = useContext(UserContext);
@@ -27,12 +28,13 @@ function Layout() {
     <>
       <div className="md:flex hidden">
         <SideBar />
-        <div className="flex-1 justify-center items-center mx-4">
+        <div className="flex-1 justify-center items-center">
           <Outlet />
         </div>
       </div>
       <div className="md:hidden block">
-        <div className="flex-1 justify-center items-center mx-4">
+        <MobileHeader />
+        <div className="flex-1 justify-center items-center">
           <Outlet />
         </div>
       </div>

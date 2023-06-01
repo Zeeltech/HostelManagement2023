@@ -11,6 +11,8 @@ import report from "../assets/report.png";
 import selected_report from "../assets/selected_report.png";
 import fine from "../assets/fine.png";
 import selected_fine from "../assets/selected_fine.png";
+import notice from "../assets/notice.png";
+import selected_notice from "../assets/selected_notice.png";
 import logout from "../assets/logout.png";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
@@ -28,7 +30,7 @@ const AccountantNavbar = () => {
   }
 
   return (
-    <div className="sticky top-0 h-screen">
+    <div className="sticky top-0 h-screen mr-4">
       <div
         className={`${
           open ? "w-60" : "w-20"
@@ -64,7 +66,7 @@ const AccountantNavbar = () => {
             alt=""
           />
           <h1
-            className={`text-lg font-semibold text-bg_white_font duration-300 origin-left hover:text-[#D90368] ${
+            className={`text-lg cursor-pointer font-semibold text-bg_white_font duration-300 origin-left hover:text-[#D90368] ${
               !open && "hidden"
             }`}
           >
@@ -203,6 +205,33 @@ const AccountantNavbar = () => {
               Fine
             </span>
           </li>
+          <Link
+            to={"/accountant/allnotices"}
+            onClick={() => setSelectedItem("notice")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "notice"
+                ? "bg-white duration-200"
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "notice" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_notice}
+              />
+            ) : (
+              <img className="h-6" src={notice} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "notice"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
+              Notice
+            </span>
+          </Link>
           <li
             onClick={logoutHandle}
             className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75 rounded-md"
