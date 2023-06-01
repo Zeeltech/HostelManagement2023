@@ -4,6 +4,7 @@ import Loader from "../../../components/Loader";
 import axios from "axios";
 import { format } from "date-fns";
 import * as myConstants from "../../../../myConstants";
+import { Navigate } from "react-router-dom";
 
 function StudentNotices() {
   const [notices, setNotices] = useState([]);

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BeforeLoginNavBtns = () => {
   return (
     <>
-      <div className="md:hidden block">
+      <div className="">
         <ul className="bg-bg_dark_section text-bg_dark_font font-bold absolute w-full left-0 top-[-400px] opacity-0 duration-200 flex mx-auto items-center justify-around">
           <li className="mx-2 my-3 md:my-0 hover:text-primary_element text-sm ">
             <a
