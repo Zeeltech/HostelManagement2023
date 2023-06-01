@@ -15,20 +15,18 @@ function AddMeal() {
   const [dinner, setDinner] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  if (!user || (user && user.role !== "Rector")) {
-    return <Navigate to="/login" />;
-  }
-
   useEffect(() => {
     axios.get("/meal/get-meal").then((res) => {
       setBreakfast(res.data.breakfast);
       setLunch(res.data.lunch);
       setDinner(res.data.dinner);
-      console.log("Here");
       setLoading(false);
     });
   }, []);
 
+  if (!user || (user && user.role !== "Rector")) {
+    return <Navigate to="/login" />;
+  }
   if (loading) {
     return <Loader />;
   }
