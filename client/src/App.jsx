@@ -22,6 +22,7 @@ import AddMeal from "./pages/Rector/Meal/AddMeal";
 import AllNotices from "./pages/Rector/Notice/AllNotices";
 
 import TodayMeal from "./components/TodayMeal";
+import StudentNotices from "./pages/Student/Notice/StudentNotices";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
@@ -54,6 +55,8 @@ function App() {
 
 
           <Route path="/rector/allnotices" element={<AllNotices/>}/>
+          <Route path="/accountant/allnotices" element={<AllNotices/>}/>
+          <Route path="/student/notices" element={<StudentNotices/>}/>
 
 
           <Route path="/meal" element={<TodayMeal />} />

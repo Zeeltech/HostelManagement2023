@@ -3,6 +3,7 @@ import { UserContext } from "../../../../UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 function EditNoticePopUp({ notice }) {
   const [title, setTitle] = useState(notice.title);
@@ -10,7 +11,7 @@ function EditNoticePopUp({ notice }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
-  if (!user || (user && user.role !== "Rector")) {
+  if (!user || (user && user.role !== "Rector" && user.role !== "Accountant")) {
     return <Navigate to="/login" />;
   }
 
@@ -32,6 +33,8 @@ function EditNoticePopUp({ notice }) {
           .put(`/notice/edit-notice/${notice._id}`, {
             title,
             description,
+            author: notice.author,
+            editor_id: user._id,
           })
           .then((res) => {
             if (res.status === 200) {
@@ -40,8 +43,13 @@ function EditNoticePopUp({ notice }) {
             }
           });
       } catch (error) {
-        if (err.response.status === 404) toast.error("Notice not found");
-        console.log(err);
+        if (error.response.status === 401) {
+          console.log("jiiii");
+          toast.error("You can't change this notice");
+          setIsModalOpen(false);
+        }
+        if (error.response.status === 404) toast.error("Notice not found");
+        console.log(error);
       }
     }
   }

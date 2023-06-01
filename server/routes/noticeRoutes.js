@@ -16,12 +16,12 @@ const { protectUser } = require("../middlewares/userProtect");
 /* APIs */
 router.post(
   "/add-notice",
-  (req, res, next) => protectUser(req, res, next, "Rector"),
+  (req, res, next) => protectUser(req, res, next, "Both"),
   addNotice
 );
 router.put(
   "/edit-notice/:id",
-  (req, res, next) => protectUser(req, res, next, "Rector"),
+  (req, res, next) => protectUser(req, res, next, "Both"),
   editNotice
 );
 router.get(
@@ -31,7 +31,7 @@ router.get(
 );
 router.delete(
   "/delete-notice/:id",
-  (req, res, next) => protectUser(req, res, next, "Rector"),
+  (req, res, next) => protectUser(req, res, next, "Both"),
   deleteNotice
 );
 router.get(
