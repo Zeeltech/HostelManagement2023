@@ -44,6 +44,7 @@ function AddFoodPopUp() {
               setIsModalOpen(false);
               setName("");
               setPhoto("");
+              window.location.reload(false);
             }
           });
       } catch (err) {
