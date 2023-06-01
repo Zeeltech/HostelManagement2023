@@ -82,7 +82,7 @@ function EditNoticePopUp({ notice }) {
             className="bg-bg_white text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2"
             onSubmit={editNotice}
           >
-            <div className="text-xl mb-4 font-medium">Add Notice</div>
+            <div className="text-xl mb-4 font-medium">Edit Notice</div>
 
             <div className="w-full">
               Title
@@ -115,7 +115,7 @@ function EditNoticePopUp({ notice }) {
                 Close
               </button>
               <button className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Add
+                Save
               </button>
             </div>
           </form>
