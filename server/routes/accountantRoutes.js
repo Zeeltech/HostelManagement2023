@@ -9,23 +9,44 @@ const router = express.Router();
 /* ALL FUNCTIONS */
 const {
   getAllStudents,
-  addStudents,
+  getCurrentRollNo,
+  allocateRollNo,
+  getActiveSeries,
+  createStudent,
 } = require("../controllers/accountantController");
 const { protectUser } = require("../middlewares/userProtect");
 
 /* MULTER CONFIGURATIONS */
 
 /* APIs */
-router.get(
+router.post(
   "/all-students",
   (req, res, next) => protectUser(req, res, next, "Accountant"),
   getAllStudents
 );
 
 router.get(
-  "/addStudents",
+  "/getrollno",
   (req, res, next) => protectUser(req, res, next, "Accountant"),
-  addStudents
+  getCurrentRollNo
+);
+
+router.get(
+  "/allocaterollno",
+  (req, res, next) => protectUser(req, res, next, "Accountant"),
+  allocateRollNo
+);
+
+router.get(
+  "/activeseries",
+  (req, res, next) => protectUser(req, res, next, "Accountant"),
+  getActiveSeries
+);
+
+router.post(
+  "/createstudent",
+  (req, res, next) => protectUser(req, res, next, "Accountant"),
+  createStudent
 );
 
 module.exports = router;

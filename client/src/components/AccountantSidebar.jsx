@@ -28,7 +28,7 @@ const AccountantNavbar = () => {
   }
 
   return (
-    <div className="flex">
+    <div className="sticky top-0 h-screen">
       <div
         className={`${
           open ? "w-60" : "w-20"
