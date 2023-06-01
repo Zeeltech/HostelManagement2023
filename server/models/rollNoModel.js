@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 
 const RollNoSchema = new mongoose.Schema(
   {
-    rollNo: {
+    year: {
       type: String,
       required: true,
     },
-    acquired: {
-      type: Boolean,
+    current: {
+      type: Number,
+      default: 0,
       required: true,
     },
   },

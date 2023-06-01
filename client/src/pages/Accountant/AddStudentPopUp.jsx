@@ -1,8 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../../UserContext";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
+import Loader from "../../components/Loader";
 
-function AddStudentPopUp() {
+function AddStudentPopUp({ fetch, setFetch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [name, setName] = useState("");
@@ -11,8 +15,18 @@ function AddStudentPopUp() {
   const [password, setPassword] = useState("");
   const [rollNo, setRollNo] = useState("");
 
+  useEffect(() => {
+    axios.get("/accountant/getrollno").then((res) => {
+      setRollNo(res.data.current);
+    });
+  }, [fetch]);
+
   if (!user || (user && user.role !== "Accountant")) {
     return <Navigate to="/login" />;
+  }
+
+  if (!rollNo) {
+    return <Loader />;
   }
 
   const openModal = () => {
@@ -25,6 +39,39 @@ function AddStudentPopUp() {
 
   async function addStudent(ev) {
     ev.preventDefault();
+    if (email === "" || password === "" || phone === "" || name === "") {
+      toast.error("Please fill all fields");
+    } else {
+      try {
+        await axios
+          .post("/accountant/createstudent", {
+            name,
+            email,
+            phone,
+            password,
+            rollNo,
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              axios.get("/accountant/allocaterollno");
+              setFetch(true);
+              setIsModalOpen(false);
+              setName("");
+              setEmail("");
+              setPassword("");
+              setPhone("");
+              toast.success("Successfully created");
+            } else {
+              toast.error("Failed to create student");
+            }
+          })
+          .catch((err) => {
+            toast.error("Failed to create student");
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   return (
@@ -39,11 +86,11 @@ function AddStudentPopUp() {
         </button>
         {isModalOpen && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-8 rounded shadow">
+            <div className="bg-white p-8 rounded shadow w-96">
               <form onSubmit={addStudent}>
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold mb-2 "
                     htmlFor="name"
                   >
                     Name:
@@ -122,6 +169,7 @@ function AddStudentPopUp() {
                     Roll No:
                   </label>
                   <input
+                    disabled
                     type="text"
                     id="rollNo"
                     name="rollNo"
