@@ -153,14 +153,14 @@ const StudentSidebar = () => {
             </span>
           </li>
           <li
-            onClick={() => setSelectedItem("notice")}
+            onClick={() => setSelectedItem("report")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
-              selectedItem === "notice"
+              selectedItem === "report"
                 ? "bg-white duration-200"
                 : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
             }`}
           >
-            {selectedItem === "notice" ? (
+            {selectedItem === "report" ? (
               <img
                 className={`h-6 rotate-[360deg] duration-500`}
                 src={selected_report}
@@ -170,7 +170,7 @@ const StudentSidebar = () => {
             )}
             <span
               className={`${!open && "hidden"} origin-left duration-75 ${
-                selectedItem === "notice"
+                selectedItem === "report"
                   ? "text-bg_dark_section font-semibold"
                   : "text-bg_white"
               }`}
