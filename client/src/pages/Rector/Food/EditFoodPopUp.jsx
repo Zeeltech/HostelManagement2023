@@ -6,11 +6,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../../../UserContext";
 import * as myConstants from "../../../../myConstants";
 
-function EditFoodPopUp({ id }) {
+function EditFoodPopUp({ food }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [photo, setPhoto] = useState(null);
-  const [fromDB, setFromDB] = useState(false);
+  const [name, setName] = useState(food.name);
+  const [photo, setPhoto] = useState(food.photo);
+  const [fromDB, setFromDB] = useState(true);
 
   const { user, setUser } = useContext(UserContext);
 
@@ -25,18 +25,6 @@ function EditFoodPopUp({ id }) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    axios.get("/food/get-food/" + id).then((res) => {
-      const { data } = res;
-      setName(data.name);
-      setPhoto(data.photo);
-      setFromDB(true);
-    });
-  }, [id]);
 
   async function updateFood(ev) {
     ev.preventDefault();
@@ -147,10 +135,11 @@ function EditFoodPopUp({ id }) {
                     className="aspect-square object-cover h-60 w-60"
                     src={myConstants.BACKEND_URL + "/uploadsFood/" + photo}
                   ></img>
+                  <div className="truncate w-40 mx-auto mt-2">{photo}</div>
                 </div>
               )}
               {photo && !fromDB && (
-                <div className="truncate w-40 mx-auto mt-2">{photo.name}</div>
+                <div className="truncate w-40 mx-auto mt-2">{photo}</div>
               )}
               <div className="flex justify-center gap-2 w-full">
                 <button onClick={closeModal} className="btn">

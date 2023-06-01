@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const NoticeSchema = new mongoose.Schema(
+const ReportSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -10,14 +10,17 @@ const NoticeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    author:{
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User"
-    }
+      ref: "User",
+    },
+    photo: {
+      type: String,
+    },
   },
   { timestamps: true, versionKey: false }
 );
 
-const NoticeModel = mongoose.model("Notice", NoticeSchema);
-module.exports = NoticeModel;
+const ReportModel = mongoose.model("Report", ReportSchema);
+module.exports = ReportModel;

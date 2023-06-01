@@ -14,7 +14,11 @@ const studentRouter = require("./routes/studentRoutes");
 const foodRouter = require("./routes/foodRoutes");
 const mealRouter = require("./routes/mealRoutes");
 const userRouter = require("./routes/userRoutes");
-const noticeRouter = require("./routes/noticeRoutes")
+
+const reportRouter = require("./routes/reportRoutes")
+
+const noticeRouter = require("./routes/noticeRoutes");
+
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -33,7 +37,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
-
+app.use("/uploadsReport",express.static(__dirname + "/uploadsReport"))
 app.use("/uploadsFood", express.static(__dirname + "/uploadsFood"));
 
 /* STARTUP */
@@ -46,9 +50,10 @@ connectDB();
 
 /* APIs */
 app.use("/", userRouter);
-/* app.use("/accountant", accountantRouter);
-app.use("/rector", rectorRouter);
+app.use("/accountant", accountantRouter);
+/* app.use("/rector", rectorRouter);
 app.use("/student", studentRouter); */
 app.use("/food", foodRouter);
 app.use("/meal", mealRouter);
 app.use("/notice", noticeRouter);
+app.use("/report",reportRouter)

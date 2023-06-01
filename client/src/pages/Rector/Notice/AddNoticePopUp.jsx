@@ -11,7 +11,7 @@ function AddNoticePopUp() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
-  if (!user || (user && user.role !== "Rector")) {
+  if (!user || (user && user.role !== "Rector" && user.role !== "Accountant")) {
     return <Navigate to="/login" />;
   }
 
@@ -33,6 +33,7 @@ function AddNoticePopUp() {
           .post("/notice/add-notice", {
             title,
             description,
+            author:user._id,
           })
           .then((res) => {
             if (res.status === 200) {

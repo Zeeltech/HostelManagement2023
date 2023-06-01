@@ -4,7 +4,6 @@ import axios from "axios";
 import * as myContants from "../myConstants";
 import IndexPage from "./pages/IndexPage";
 import { UserContext, UserContextProvider } from "../UserContext";
-import UserRegister from "./pages/UserRegister";
 import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
@@ -22,6 +21,12 @@ import AddMeal from "./pages/Rector/Meal/AddMeal";
 import AllNotices from "./pages/Rector/Notice/AllNotices";
 
 import TodayMeal from "./components/TodayMeal";
+import StudentNotices from "./pages/Student/Notice/StudentNotices";
+
+import StudentReport from "./pages/Student/Report/StudentReport";
+
+
+import StudentsProfile from "./pages/Accountant/StudentsProfile";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
@@ -33,7 +38,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
-          <Route path="/register" element={<UserRegister />} />
           <Route path="/login" element={<UserLogin />} />
 
           <Route path="/rector/dashboard" element={<RectorDashboard />} />
@@ -53,11 +57,18 @@ function App() {
           <Route path="/rector/addmeal" element={<AddMeal />} />
 
 
-          <Route path="/rector/allnotices" element={<AllNotices/>}/>
+          
+
+          <Route path="/student/report" element={<StudentReport/>}/>
+
+          <Route path="/rector/allnotices" element={<AllNotices />} />
+          <Route path="/accountant/allnotices" element={<AllNotices />} />
+          <Route path="/student/notices" element={<StudentNotices />} />
 
 
           <Route path="/meal" element={<TodayMeal />} />
 
+          <Route path="/accountant/students" element={<StudentsProfile />} />
         </Route>
       </Routes>
     </UserContextProvider>

@@ -14,13 +14,15 @@ function AllFoods() {
   const [foods, setFoods] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
     axios.get("/food/get-foods").then((res) => {
       setFoods(res.data);
       setLoading(false);
+      setFetch(false);
     });
-  }, []);
+  }, [fetch]);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
@@ -35,6 +37,7 @@ function AllFoods() {
     if (a) {
       await axios.delete("/food/delete-food/" + id).then((res) => {
         if (res.status === 200) {
+          setFetch(true);
           toast.success("Deleted Successfully");
         }
       });
@@ -83,7 +86,7 @@ function AllFoods() {
                   />
                 </svg>
               </div>
-              <EditFoodPopUp id={food._id} />
+              <EditFoodPopUp food={food} />
             </div>
           ))}
         <AddFood />

@@ -22,7 +22,12 @@ const protectUser = async (req, res, next, role) => {
       // Open for specific
       req.user = root_user;
       next();
-    } else {
+    }else if(role=="Both" && (root_user.role === "Rector" || root_user.role === "Accountant")){
+      // Open for both Rector and Accountant
+      req.user = root_user;
+      next();
+    } 
+    else {
       // Else
       // Open for all will not have any protection
       res.status(401).json({ message: "Authorization failed" });
