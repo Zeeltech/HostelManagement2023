@@ -58,7 +58,6 @@ const getMeals = async (req, res) => {
       .populate("lunch")
       .populate("dinner");
 
-    console.log(date);
     if (mealIteams) {
       return res.status(200).json(mealIteams);
     } else {

@@ -34,14 +34,6 @@ const BeforeLoginNavBtns = () => {
               Log In
             </a>
           </li>
-          <li className="mx-2 my-6 md:my-0 hover:scale-95 duration-200">
-            <a
-              className="py-2.5 px-2.5 font-semibold text-sm bg-bg_white text-bg_dark_font border-2 border-bg_light_section rounded-md items-center hover:bg-bg_red duration-200 hover:border-bg_red hover:text-bg_white_font"
-              href={"/register"}
-            >
-              Register
-            </a>
-          </li>
         </ul>
       </div>
     </>
