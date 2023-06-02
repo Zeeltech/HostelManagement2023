@@ -43,7 +43,7 @@ const ProfileUpdatePopUp = () => {
 
   return (
     <>
-      <ToastContainer />
+      
       <button onClick={openModal} className="btn">
         Edit Profile
       </button>

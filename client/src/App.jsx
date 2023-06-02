@@ -8,6 +8,8 @@ import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import AddFoodPopUp from "./pages/Rector/Food/AddFoodPopUp";
 import AllFoods from "./pages/Rector/Food/AllFoods";
@@ -27,6 +29,7 @@ import StudentReport from "./pages/Student/Report/StudentReport";
 
 import StudentsProfile from "./pages/Accountant/StudentsProfile";
 import ResetPassword from "./components/ResetPassword";
+import AllocateBlocks from "./pages/Rector/AllocateBlocks";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -34,6 +37,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <UserContextProvider>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
@@ -66,6 +70,8 @@ function App() {
           <Route path="/accountant/students" element={<StudentsProfile />} />
 
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+          <Route path="/rector/allocate-blocks" element={<AllocateBlocks />} />
         </Route>
       </Routes>
     </UserContextProvider>

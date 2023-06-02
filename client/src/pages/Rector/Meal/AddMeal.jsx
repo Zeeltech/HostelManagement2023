@@ -46,7 +46,7 @@ function AddMeal() {
 
   return (
     <>
-      <ToastContainer />
+      
       <div className="flex justify-center mb-6 mt-2">
         <button
           className="flex items-center gap-2 bg-bg_red px-4 py-2 text-bg_white_font rounded-md hover:bg-bg_dark_section duration-200"
