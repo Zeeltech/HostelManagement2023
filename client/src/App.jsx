@@ -25,9 +25,8 @@ import StudentNotices from "./pages/Student/Notice/StudentNotices";
 
 import StudentReport from "./pages/Student/Report/StudentReport";
 
-
 import StudentsProfile from "./pages/Accountant/StudentsProfile";
-
+import ResetPassword from "./components/ResetPassword";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -56,19 +55,17 @@ function App() {
           <Route path="/rector/allfoods/:id" element={<EditFoodPopUp />} />
           <Route path="/rector/addmeal" element={<AddMeal />} />
 
-
-          
-
-          <Route path="/student/report" element={<StudentReport/>}/>
+          <Route path="/student/report" element={<StudentReport />} />
 
           <Route path="/rector/allnotices" element={<AllNotices />} />
           <Route path="/accountant/allnotices" element={<AllNotices />} />
           <Route path="/student/notices" element={<StudentNotices />} />
 
-
           <Route path="/meal" element={<TodayMeal />} />
 
           <Route path="/accountant/students" element={<StudentsProfile />} />
+
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Route>
       </Routes>
     </UserContextProvider>
