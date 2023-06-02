@@ -10,12 +10,12 @@
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="textarea"]
- {
+input[type="textarea"],
+input[type="number"] {
   @apply w-full border-2 border-bg_dark_section rounded-md py-2 px-4 text-black;
 }
 
-textarea{
+textarea {
   @apply w-full border-2 border-bg_dark_section rounded-md py-2 px-4 text-black min-h-[200px];
 }
 .btn {

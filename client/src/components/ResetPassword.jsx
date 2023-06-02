@@ -46,7 +46,6 @@ const ResetPassword = () => {
   return (
     <>
       <Header />
-      <ToastContainer />
       <div className="give-height flex justify-center items-center mt-24 text-bg_white_font font-semibold text-sm">
         <form
           onSubmit={handleResetPassword}

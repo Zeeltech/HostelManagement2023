@@ -90,7 +90,6 @@ function UserLogin() {
   return (
     <>
       <Header />
-      <ToastContainer />
       <div className="give-height flex justify-center items-center mt-24 text-bg_white_font font-semibold text-sm">
         {loading && <Loader height={"h-[70vh]"} />}
         {!loading && (

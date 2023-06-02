@@ -46,7 +46,6 @@ function AllFoods() {
 
   return (
     <>
-      <ToastContainer />
       <div className="flex justify-center mb-6 text-2xl font-bold labels">
         All food items
       </div>
