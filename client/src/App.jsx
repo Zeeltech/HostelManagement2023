@@ -27,6 +27,8 @@ import StudentReport from "./pages/Student/Report/StudentReport";
 
 
 import StudentsProfile from "./pages/Accountant/StudentsProfile";
+import RectorReport from "./pages/Rector/Report/RectorReport";
+import AccountantReport from "./pages/Accountant/Report/AccountantReport";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
@@ -60,6 +62,8 @@ function App() {
           
 
           <Route path="/student/report" element={<StudentReport/>}/>
+          <Route path="/rector/report" element={<RectorReport/>}/>
+          <Route path="/accountant/report" element={<AccountantReport/>}/>
 
           <Route path="/rector/allnotices" element={<AllNotices />} />
           <Route path="/accountant/allnotices" element={<AllNotices />} />

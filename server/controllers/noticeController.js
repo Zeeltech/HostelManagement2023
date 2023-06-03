@@ -75,9 +75,7 @@ const getAllNotices = async (req, res) => {
 const deleteNotice = async (req, res) => {
   try {
     const {id} = req.params;
-    console.log(req.body);
     const {editor_id} = req.body
-    console.log(editor_id);
     
     const noticeDoc = await Notice.findById(id);
 
@@ -87,10 +85,9 @@ const deleteNotice = async (req, res) => {
     const author_id = noticeDoc.author;
     const author = await User.findById(author_id)
     const editorDoc = await User.findById(editor_id)
-     //editorDoc -> user who want to edit
+     //editorDoc -> user who want to delete
     //author -> who create notice
 
-   console.log(editorDoc);
    
     if(author.role != editorDoc.role){
       return res.status(401).json("Authorization failed")

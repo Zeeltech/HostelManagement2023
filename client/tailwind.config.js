@@ -12,7 +12,8 @@ export default {
         bg_red: "#ef233c",
         bg_white_font: "#FFFFFF",
         bg_dark_font: "#2b2d42",
-        bg_notice: "#FEF9C3"
+        bg_notice: "#FEF9C3",
+        bg_report: "#f2f6fc",
       },
     },
   },
