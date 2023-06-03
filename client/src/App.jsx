@@ -8,6 +8,8 @@ import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
 import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import AddFoodPopUp from "./pages/Rector/Food/AddFoodPopUp";
 import AllFoods from "./pages/Rector/Food/AllFoods";
@@ -25,10 +27,14 @@ import StudentNotices from "./pages/Student/Notice/StudentNotices";
 
 import StudentReport from "./pages/Student/Report/StudentReport";
 
-
 import StudentsProfile from "./pages/Accountant/StudentsProfile";
+
 import RectorReport from "./pages/Rector/Report/RectorReport";
 import AccountantReport from "./pages/Accountant/Report/AccountantReport";
+
+
+import ResetPassword from "./components/ResetPassword";
+import AllocateBlocks from "./pages/Rector/AllocateBlocks";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
@@ -37,6 +43,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <UserContextProvider>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
@@ -59,20 +66,25 @@ function App() {
           <Route path="/rector/addmeal" element={<AddMeal />} />
 
 
+
           
 
           <Route path="/student/report" element={<StudentReport/>}/>
           <Route path="/rector/report" element={<RectorReport/>}/>
           <Route path="/accountant/report" element={<AccountantReport/>}/>
 
+
           <Route path="/rector/allnotices" element={<AllNotices />} />
           <Route path="/accountant/allnotices" element={<AllNotices />} />
           <Route path="/student/notices" element={<StudentNotices />} />
 
-
           <Route path="/meal" element={<TodayMeal />} />
 
           <Route path="/accountant/students" element={<StudentsProfile />} />
+
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+          <Route path="/rector/allocate-blocks" element={<AllocateBlocks />} />
         </Route>
       </Routes>
     </UserContextProvider>

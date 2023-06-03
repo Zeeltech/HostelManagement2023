@@ -28,6 +28,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "Student",
     },
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true, versionKey: false }
 );
