@@ -18,6 +18,10 @@ const ReportSchema = new mongoose.Schema(
     photo: {
       type: String,
     },
+    receiver: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true, versionKey: false }
 );

@@ -7,9 +7,13 @@ const path = require("path");
 const router = express.Router();
 
 /* ALL FUNCTIONS */
-const { addReport, getReport } = require("../controllers/reportController");
+const {
+  addReport,
+  getReport,
+  getReports,
+  deleteReport,
+} = require("../controllers/reportController");
 const { protectUser } = require("../middlewares/userProtect");
-
 
 /* MULTER CONFIGURATIONS */
 const storage = multer.diskStorage({
@@ -46,6 +50,20 @@ router.post(
   addReport
 );
 
-router.get("/get-report",(req,res,next)=> protectUser(req,res,next,"Student"),getReport)
+router.get(
+  "/get-report",
+  (req, res, next) => protectUser(req, res, next, "Student"),
+  getReport
+);
+router.get(
+  "/get-reports",
+  (req, res, next) => protectUser(req, res, next, "Both"),
+  getReports
+);
+router.delete(
+  "/delete-report/:id",
+  (req, res, next) => protectUser(req, res, next, "Both"),
+  deleteReport
+);
 
 module.exports = router;

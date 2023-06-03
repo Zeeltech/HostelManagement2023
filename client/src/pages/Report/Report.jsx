@@ -1,21 +1,20 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../../UserContext";
-import Loader from "../../../components/Loader";
+import { UserContext } from "../../../UserContext";
+import Loader from "../../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import StudentViewPopUp from "./StudentViewPopUp";
 import { Navigate } from "react-router-dom";
-import StudentAddReportPopUp from "./StudentAddReportPopUp";
+import ViewPopUp from "./ViewPopUp";
 
-function StudentReport() {
+function Report({role}) {
   const [fetch, setFetch] = useState(false);
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get("report/get-report").then((res) => {
+    axios.get("report/get-reports").then((res) => {
       const sortedReports = res.data.sort((a, b) => {
         return new Date(b.updatedAt) - new Date(a.updatedAt);
       });
@@ -25,7 +24,8 @@ function StudentReport() {
     });
   }, [fetch]);
 
-  if (!user || (user && user.role !== "Student")) {
+ 
+  if (!user || (user && user.role !== role)) {
     return <Navigate to="/login" />;
   }
 
@@ -33,19 +33,19 @@ function StudentReport() {
     return <Loader />;
   }
 
+
   return (
-    <>
+    <div>
       <ToastContainer />
-      <StudentAddReportPopUp setFetch={setFetch}/>
       <div className="flex justify-center mb-6 text-2xl font-bold labels">
         All Reports
       </div>
       <div className="flex flex-col gap-2 relative">
         {reports.length > 0 &&
-          reports.map((report) => <StudentViewPopUp report={report} />)}
+          reports.map((report) => <ViewPopUp report={report} setFetch={setFetch} />)}
       </div>
-    </>
+    </div>
   );
 }
 
-export default StudentReport;
+export default Report;
