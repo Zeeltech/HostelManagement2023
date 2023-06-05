@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import * as myConstants from "../../../myConstants";
 import axios from "axios";
 
-function ViewPopUp({ report ,setFetch }) {
+function ViewPopUp({ report, setFetch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -22,7 +22,7 @@ function ViewPopUp({ report ,setFetch }) {
       await axios.delete("/report/delete-report/" + report._id).then((res) => {
         if (res.status === 200) {
           setFetch(true);
-          setIsModalOpen(false)
+          setIsModalOpen(false);
           toast.success("Deleted Successfully");
         }
       });
@@ -33,15 +33,20 @@ function ViewPopUp({ report ,setFetch }) {
     <>
       <>
         <div key={report._id} onClick={openModal}>
-          <div className="flex justify-between bg-bg_report rounded-sm p-1  cursor-pointer relative ">
-            <div className="mr-5">From: {report.author.rollNo}</div>
+          <div className="flex justify-between bg-bg_report rounded-sm p-1 mx-6 cursor-pointer relative ">
+            <div className="mr-5 min-w-[125px]">
+              From: {report.author.rollNo}
+            </div>
             <div className="flex-1 truncate max-w-2xl ">{report.title}</div>
             <div>{format(new Date(report.updatedAt), "dd-MM-yyyy")}</div>
           </div>
           {isModalOpen && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
               <div className="w-96 bg-bg_white relative text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2">
-                <div className="absolute  top-4 right-4 hover:text-green-500" onClick={markAsRead}>
+                <div
+                  className="absolute  top-4 right-4 hover:text-green-500"
+                  onClick={markAsRead}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -49,7 +54,6 @@ function ViewPopUp({ report ,setFetch }) {
                     strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-8 h-8"
-                    
                   >
                     <path
                       strokeLinecap="round"

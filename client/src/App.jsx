@@ -32,10 +32,10 @@ import StudentsProfile from "./pages/Accountant/StudentsProfile";
 import RectorReport from "./pages/Rector/Report/RectorReport";
 import AccountantReport from "./pages/Accountant/Report/AccountantReport";
 
-
 import ResetPassword from "./components/ResetPassword";
-import AllocateBlocks from "./pages/Rector/Block/AllocateBlocks";
 
+import AllocateBlocks from "./pages/Rector/Block/AllocateBlocks";
+import BlockPage from "./pages/Rector/Block/BlockPage";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -65,14 +65,9 @@ function App() {
           <Route path="/rector/allfoods/:id" element={<EditFoodPopUp />} />
           <Route path="/rector/addmeal" element={<AddMeal />} />
 
-
-
-          
-
-          <Route path="/student/report" element={<StudentReport/>}/>
-          <Route path="/rector/report" element={<RectorReport/>}/>
-          <Route path="/accountant/report" element={<AccountantReport/>}/>
-
+          <Route path="/student/report" element={<StudentReport />} />
+          <Route path="/rector/report" element={<RectorReport />} />
+          <Route path="/accountant/report" element={<AccountantReport />} />
 
           <Route path="/rector/allnotices" element={<AllNotices />} />
           <Route path="/accountant/allnotices" element={<AllNotices />} />
@@ -85,6 +80,7 @@ function App() {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           <Route path="/rector/allocate-blocks" element={<AllocateBlocks />} />
+          <Route path="/rector/allocate-blocks/:id" element={<BlockPage />} />
         </Route>
       </Routes>
     </UserContextProvider>

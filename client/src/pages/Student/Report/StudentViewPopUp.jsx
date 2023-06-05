@@ -17,13 +17,13 @@ function StudentViewPopUp({ report }) {
   return (
     <>
       <div key={report._id} onClick={openModal}>
-        <div className="flex justify-between bg-bg_report rounded-sm p-1  cursor-pointer relative ">
-          <div>To: {report.receiver}</div>
+        <div className="flex justify-between bg-bg_report rounded-sm p-1 mx-6 cursor-pointer relative ">
+          <div className="min-w-[125px]">To: {report.receiver}</div>
           <div className="flex-1  truncate max-w-3xl">{report.title}</div>
           <div>{format(new Date(report.updatedAt), "dd-MM-yyyy")}</div>
         </div>
         {isModalOpen && (
-          <div    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="w-96 bg-bg_white text-bg_dark_font rounded-md shadow-lg shadow-bg_light_section border-2 border-bg_dark_section p-7 flex flex-col justify-center items-center gap-2">
               <div className="w-full">
                 <span className="font-semibold">To:</span> {report.receiver}
