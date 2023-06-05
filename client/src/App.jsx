@@ -34,7 +34,7 @@ import AccountantReport from "./pages/Accountant/Report/AccountantReport";
 
 
 import ResetPassword from "./components/ResetPassword";
-import AllocateBlocks from "./pages/Rector/AllocateBlocks";
+import AllocateBlocks from "./pages/Rector/Block/AllocateBlocks";
 
 
 axios.defaults.baseURL = myContants.BACKEND_URL;

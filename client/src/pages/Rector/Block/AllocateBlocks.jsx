@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../UserContext";
-import Loader from "../../components/Loader";
+import { UserContext } from "../../../../UserContext";
+import Loader from "../../../components/Loader";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import AddBlockPopUp from "./AddBlockPopUp";
