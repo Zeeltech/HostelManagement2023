@@ -36,6 +36,10 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    roomNumber: {
+      type: String,
+      default: null,
+    }
   },
   { timestamps: true, versionKey: false }
 );
