@@ -99,7 +99,7 @@ const StudentSidebar = () => {
               My&nbsp;profile
             </span>
           </Link>
-          <li
+          <Link
             to={"/meal"}
             onClick={() => setSelectedItem("meal")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
@@ -125,7 +125,7 @@ const StudentSidebar = () => {
             >
               Today's&nbsp;Meal
             </span>
-          </li>
+          </Link>
           <li
             onClick={() => setSelectedItem("home")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
@@ -152,7 +152,8 @@ const StudentSidebar = () => {
               Home
             </span>
           </li>
-          <li
+          <Link
+            to={"/student/report"}
             onClick={() => setSelectedItem("report")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
               selectedItem === "report"
@@ -177,7 +178,7 @@ const StudentSidebar = () => {
             >
               Report
             </span>
-          </li>
+          </Link>
           <Link
             to={"/student/notices"}
             onClick={() => setSelectedItem("notice")}

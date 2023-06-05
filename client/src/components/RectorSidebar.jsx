@@ -13,6 +13,8 @@ import room from "../assets/room.png";
 import selected_room from "../assets/selected_room.png";
 import food_menu from "../assets/food_menu.png";
 import selected_food_menu from "../assets/selected_food_menu.png";
+import notice from "../assets/notice.png";
+import selected_notice from "../assets/selected_notice.png";
 import logout from "../assets/logout.png";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
@@ -162,14 +164,14 @@ const RectorSidebar = () => {
 
             <Link
               to="/rector/addmeal"
-              onClick={() => setSelectedItem("addmeal")}
+              onClick={() => setSelectedItem("todayMeal")}
               className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
-                selectedItem === "addmeal"
+                selectedItem === "todayMeal"
                   ? "bg-white duration-200"
                   : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
               }`}
             >
-              {selectedItem === "addmeal" ? (
+              {selectedItem === "todayMeal" ? (
                 <img
                   className={`h-6 rotate-[360deg] duration-500`}
                   src={selected_food}
@@ -179,7 +181,7 @@ const RectorSidebar = () => {
               )}
               <span
                 className={`${!open && "hidden"} origin-left duration-75 ${
-                  selectedItem === "addmeal"
+                  selectedItem === "todayMeal"
                     ? "text-bg_dark_section font-semibold"
                     : "text-bg_white"
                 }`}
@@ -187,8 +189,8 @@ const RectorSidebar = () => {
                 Today's&nbsp;Meal
               </span>
             </Link>
-
-            <li
+            <Link
+              to={"/rector/allocate-blocks"}
               onClick={() => setSelectedItem("roomAllocation")}
               className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
                 selectedItem === "roomAllocation"
@@ -213,7 +215,7 @@ const RectorSidebar = () => {
               >
                 Room&nbsp;allocation
               </span>
-            </li>
+            </Link>
 
             <Link
               to={"/rector/allnotices"}
@@ -227,10 +229,10 @@ const RectorSidebar = () => {
               {selectedItem === "notice" ? (
                 <img
                   className={`h-6 rotate-[360deg] duration-500`}
-                  src={selected_report}
+                  src={selected_notice}
                 />
               ) : (
-                <img className="h-6" src={report} />
+                <img className="h-6" src={notice} />
               )}
               <span
                 className={`${!open && "hidden"} origin-left duration-75 ${
@@ -242,7 +244,33 @@ const RectorSidebar = () => {
                 Notice
               </span>
             </Link>
-
+            <Link
+              to={"/rector/report"}
+              onClick={() => setSelectedItem("report")}
+              className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+                selectedItem === "report"
+                  ? "bg-white duration-200"
+                  : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+              }`}
+            >
+              {selectedItem === "report" ? (
+                <img
+                  className={`h-6 rotate-[360deg] duration-500`}
+                  src={selected_report}
+                />
+              ) : (
+                <img className="h-6" src={report} />
+              )}
+              <span
+                className={`${!open && "hidden"} origin-left duration-75 ${
+                  selectedItem === "report"
+                    ? "text-bg_dark_section font-semibold"
+                    : "text-bg_white"
+                }`}
+              >
+                Report
+              </span>
+            </Link>
             <li
               onClick={logoutHandle}
               className="text-white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75 rounded-md"

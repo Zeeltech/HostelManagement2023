@@ -154,32 +154,6 @@ const AccountantNavbar = () => {
             </span>
           </li>
           <li
-            onClick={() => setSelectedItem("report")}
-            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
-              selectedItem === "report"
-                ? "bg-white "
-                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
-            }`}
-          >
-            {selectedItem === "report" ? (
-              <img
-                className={`h-6 rotate-[360deg] duration-500`}
-                src={selected_report}
-              />
-            ) : (
-              <img className="h-6" src={report} />
-            )}
-            <span
-              className={`${!open && "hidden"} origin-left duration-75 ${
-                selectedItem === "report"
-                  ? "text-bg_dark_section font-semibold"
-                  : "text-bg_white"
-              }`}
-            >
-              Report
-            </span>
-          </li>
-          <li
             onClick={() => setSelectedItem("fine")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
               selectedItem === "fine"
@@ -205,6 +179,33 @@ const AccountantNavbar = () => {
               Fine
             </span>
           </li>
+          <Link
+            to={"/accountant/report"}
+            onClick={() => setSelectedItem("report")}
+            className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
+              selectedItem === "report"
+                ? "bg-white "
+                : "hover:bg-white hover:bg-opacity-20 hover:scale-95 transition-all duration-75"
+            }`}
+          >
+            {selectedItem === "report" ? (
+              <img
+                className={`h-6 rotate-[360deg] duration-500`}
+                src={selected_report}
+              />
+            ) : (
+              <img className="h-6" src={report} />
+            )}
+            <span
+              className={`${!open && "hidden"} origin-left duration-75 ${
+                selectedItem === "report"
+                  ? "text-bg_dark_section font-semibold"
+                  : "text-bg_white"
+              }`}
+            >
+              Report
+            </span>
+          </Link>
           <Link
             to={"/accountant/allnotices"}
             onClick={() => setSelectedItem("notice")}
