@@ -38,7 +38,27 @@ const getAllBlocks = async (req, res) => {
   }
 };
 
+const getBlock = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blockDoc = await Blocks.findById(id).populate({
+      path: "rooms",
+      populate: { path: "allocatedStudents.user" },
+    });
+
+    if (!blockDoc) {
+      return res.status(404).json({ message: "Block does not exist" });
+    }
+
+    return res.status(200).json(blockDoc);
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: `Error occurred ${error}` });
+  }
+};
+
 module.exports = {
   allocateBlock,
   getAllBlocks,
+  getBlock,
 };

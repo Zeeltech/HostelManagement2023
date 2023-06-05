@@ -127,7 +127,8 @@ const AccountantNavbar = () => {
               Home
             </span>
           </li>
-          <li
+          <Link
+            to={"/accountant/students"}
             onClick={() => setSelectedItem("studentInfo")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${
               selectedItem === "studentInfo"
@@ -152,7 +153,7 @@ const AccountantNavbar = () => {
             >
               Student&nbsp;Info
             </span>
-          </li>
+          </Link>
           <li
             onClick={() => setSelectedItem("fine")}
             className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md ${

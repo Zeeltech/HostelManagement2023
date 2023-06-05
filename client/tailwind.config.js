@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      display:["group-hover"],
+      display: ["group-hover"],
       colors: {
         bg_white: "#FFFFFF",
         bg_light_section: "#9197AE",
@@ -17,5 +17,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/container-queries")],
 };
