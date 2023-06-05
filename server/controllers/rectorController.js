@@ -39,7 +39,6 @@ const getAllBlocks = async (req, res) => {
   }
 };
 
-
 const allocateStudent = async (req, res) => {
   try {
     const { id } = req.params; // BLOCK ID
@@ -80,11 +79,9 @@ const allocateStudent = async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
     if (studentDoc.roomNumber != null) {
-      return res
-        .status(400)
-        .json({
-          message: `Student already exists in  room ${studentDoc.roomNumber}`,
-        });
+      return res.status(400).json({
+        message: `Student already exists in  room ${studentDoc.roomNumber}`,
+      });
     }
 
     studentDoc.set({
@@ -99,14 +96,6 @@ const allocateStudent = async (req, res) => {
     return res.json({ message: `Error occured ${error}` });
   }
 };
-
-
-
-module.exports = {
-  allocateBlock,
-  getAllBlocks,
-  allocateStudent,
-  getBlock,
 
 const getBlock = async (req, res) => {
   try {
@@ -127,5 +116,9 @@ const getBlock = async (req, res) => {
   }
 };
 
-
+module.exports = {
+  allocateBlock,
+  getAllBlocks,
+  allocateStudent,
+  getBlock,
 };

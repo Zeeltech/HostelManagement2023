@@ -1,20 +1,36 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../../../UserContext";
+import {  Navigate } from "react-router-dom";
+import Loader from "../../../components/Loader";
+
 
 const BlockPage = () => {
   const { id } = useParams();
   const [block, setBlock] = useState(null);
+  const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     if (id) {
       axios.get("/rector/get-block/" + id).then((res) => {
         if (res.status === 200) {
           setBlock(res.data);
+          setLoading(false)
         }
       });
     }
   }, [id]);
+
+  if (!user || (user && user.role !== "Rector")) {
+    return <Navigate to="/login" />;
+  }
+
+  if (loading) {
+    return <Loader />;
+  }
 
   function roomOccupancy(capacity, allocatedStudents) {
     let boxes = [];
@@ -36,7 +52,7 @@ const BlockPage = () => {
       }
     }
 
-    return <div className="flex">{boxes}</div>;
+    return <div className="flex flex-wrap">{boxes}</div>;
   }
 
   return (
