@@ -10,6 +10,7 @@ const router = express.Router();
 const {
   allocateBlock,
   getAllBlocks,
+  getBlock,
 } = require("../controllers/rectorController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -26,6 +27,12 @@ router.get(
   "/get-blocks",
   (req, res, next) => protectUser(req, res, next, "Rector"),
   getAllBlocks
+);
+
+router.get(
+  "/get-block/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  getBlock
 );
 
 module.exports = router;
