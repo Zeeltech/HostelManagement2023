@@ -33,7 +33,10 @@ function AddBlockPopUp({ fetch, setFetch }) {
     ev.preventDefault();
     if (start > end) {
       toast.error("Provide correct range of rooms");
-    } else {
+    }else if(capacity === 0){
+      toast.error("Please provide the capacity for the rooms.");
+    } 
+    else {
       axios
         .post("/rector/allocate-block", { name, start, end, capacity })
         .then((res) => {

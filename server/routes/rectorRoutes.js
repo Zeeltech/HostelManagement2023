@@ -13,7 +13,7 @@ const {
 
   allocateStudent,
   getBlock,
-
+  deleteBlock,
 } = require("../controllers/rectorController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -32,12 +32,11 @@ router.get(
   getAllBlocks
 );
 
-
 router.post(
   "/allocate-student/:id",
-  (req,res,next)=> protectUser(req,res,next,"Rector"),
+  (req, res, next) => protectUser(req, res, next, "Rector"),
   allocateStudent
-)
+);
 
 router.get(
   "/get-block/:id",
@@ -45,5 +44,10 @@ router.get(
   getBlock
 );
 
+router.delete(
+  "/delete-block/:id",
+  (req, res, next) => protectUser(req, res, next, "Rector"),
+  deleteBlock
+);
 
 module.exports = router;
