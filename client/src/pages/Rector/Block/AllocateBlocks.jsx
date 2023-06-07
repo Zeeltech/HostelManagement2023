@@ -31,10 +31,10 @@ function AllocateBlocks() {
 
   return (
     <>
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <div className="mt-2 flex justify-center mb-6 text-2xl font-bold labels">
         All Blocks
       </div>
-      <div className="relative rounded-2xl grid gap-x-6 gap-y-8 grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+      <div className="ml-2 mr-4 relative rounded-2xl grid gap-x-6 gap-y-8 grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {blocks.length > 0 &&
           blocks.map((block) => (
             <Link to={`/rector/allocate-blocks/${block._id}`} key={block._id}>

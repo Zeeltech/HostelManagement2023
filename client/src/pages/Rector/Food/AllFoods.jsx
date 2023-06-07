@@ -46,10 +46,10 @@ function AllFoods() {
 
   return (
     <>
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <div className="flex justify-center mb-6 text-2xl font-bold labels mx-4 mt-4">
         All food items
       </div>
-      <div className="relative rounded-2xl  grid gap-x-6 gap-y-8 grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+      <div className="relative rounded-2xl mx-8 grid gap-x-6 gap-y-8 grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {foods.length > 0 &&
           foods.map((food) => (
             <div className="relative" key={food._id}>

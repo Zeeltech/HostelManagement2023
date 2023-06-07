@@ -36,11 +36,11 @@ function StudentReport() {
   return (
     <>
       <ToastContainer />
-      <StudentAddReportPopUp setFetch={setFetch}/>
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <StudentAddReportPopUp setFetch={setFetch} />
+      <div className="flex justify-center mb-6 text-2xl font-bold labels mx-4 mt-4">
         All Reports
       </div>
-      <div className="flex flex-col gap-2 relative">
+      <div className="flex flex-col gap-2 relative mx-2">
         {reports.length > 0 &&
           reports.map((report) => <StudentViewPopUp report={report} />)}
       </div>

@@ -32,7 +32,7 @@ function TodayMeal() {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto max-w-7xl mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto max-w-7xl mt-10 mr-4 ml-4">
         <div className="border-2 border-bg_dark_section p-4 rounded-md shadow-md shadow-bg_dark_section">
           <div className="mb-6 text-2xl font-bold text-center labels">
             Breakfast

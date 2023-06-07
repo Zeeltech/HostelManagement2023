@@ -42,7 +42,7 @@ const RectorSidebar = () => {
           } duration-300 h-screen p-5 pt-8 bg-bg_dark_section relative`}
         >
           <div
-            className={`absolute cursor-pointer rounded-full -right-3 border-2 top-9 w-7 border-bg_dark_section bg-white text-bg_dark_section ${
+            className={`absolute cursor-pointer rounded-full -right-3 border-2 top-16 w-7 border-bg_dark_section bg-white text-bg_dark_section ${
               !open && "rotate-180"
             }`}
             onClick={() => setOpen(!open)}

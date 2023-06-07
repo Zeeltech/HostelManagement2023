@@ -119,13 +119,14 @@ function StudentMobileHeader() {
                   <img className="h-6" src={food} />
                   <span className="text-bg_white">Today's&nbsp;Meal</span>
                 </Link>
-                <li
+                <Link
+                  to={"/student/report"}
                   onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
                 >
                   <img className="h-6" src={report} />
                   <span className="text-bg_white">Report</span>
-                </li>
+                </Link>
                 <Link
                   to={"/student/notices"}
                   onClick={menuToggel}

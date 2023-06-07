@@ -31,11 +31,11 @@ function StudentNotices() {
 
   return (
     <>
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <div className="flex justify-center mb-6 text-2xl font-bold labels mt-4 mx-4">
         All notices
       </div>
 
-      <div className="grid lg:grid-cols-4 sm:grid-cols-3 gap-2">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-3 gap-2 mx-6">
         {notices.length > 0 &&
           notices.map((notice) => (
             <div

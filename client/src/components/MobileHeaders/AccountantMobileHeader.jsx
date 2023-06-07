@@ -106,8 +106,8 @@ function AccountantMobileHeader() {
                 className={`absolute bg-bg_dark_section w-1/2 pl-7 h-screen transition-all ease-in z-10`}
               >
                 <Link
-                  onClick={menuToggel}
                   to={"/accountant/profile"}
+                  onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 mt-4 rounded-md`}
                 >
                   <img className="h-6" src={User} />
@@ -120,20 +120,14 @@ function AccountantMobileHeader() {
                   <img className="h-6" src={home} />
                   <span className="text-bg_white">Home</span>
                 </li>
-                <li
+                <Link
+                  to={"/accountant/students"}
                   onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
                 >
                   <img className="h-6" src={student} />
                   <span className="text-bg_white">Student&nbsp;Info</span>
-                </li>
-                <li
-                  onClick={menuToggel}
-                  className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
-                >
-                  <img className="h-6" src={report} />
-                  <span className="text-bg_white">Report</span>
-                </li>
+                </Link>
                 <li
                   onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
@@ -142,8 +136,16 @@ function AccountantMobileHeader() {
                   <span className="text-bg_white">Fine</span>
                 </li>
                 <Link
+                  to={"/accountant/report"}
                   onClick={menuToggel}
+                  className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
+                >
+                  <img className="h-6" src={report} />
+                  <span className="text-bg_white">Report</span>
+                </Link>
+                <Link
                   to={"/accountant/allnotices"}
+                  onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
                 >
                   <img className="h-6" src={notice} />
