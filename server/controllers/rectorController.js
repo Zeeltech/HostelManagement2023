@@ -100,7 +100,10 @@ const allocateStudent = async (req, res) => {
 const getBlock = async (req, res) => {
   try {
     const { id } = req.params;
-    const blockDoc = await Blocks.findById(id).populate("rooms.allocatedStudents");
+    const blockDoc = await Blocks.findById(id).populate({
+      path : "rooms.allocatedStudents",
+      select : "-password -role -resetPasswordToken -resetPasswordExpires -createdAt -updatedAt"
+    });
 
     if (!blockDoc) {
       return res.status(404).json({ message: "Block does not exist" });
