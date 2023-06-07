@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../../../UserContext";
 
-function StudentAddReportPopUp({setFetch}) {
+function StudentAddReportPopUp({ setFetch }) {
   const [title, setTitle] = useState("");
   const [receiver, setReceiver] = useState("");
   const [description, setDescription] = useState("");
@@ -63,7 +63,7 @@ function StudentAddReportPopUp({setFetch}) {
       <ToastContainer />
       <div
         onClick={openModal}
-        className="bg-bg_red text-bg_white_font w-40 justify-center rounded-sm flex gap-2 p-2 font-bold mx-auto my-2 hover:bg-bg_dark_section cursor-pointer"
+        className="bg-bg_red text-bg_white_font w-40 justify-center rounded-lg flex gap-2 p-2 font-bold mx-auto my-4 hover:bg-bg_dark_section cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -8,6 +8,7 @@ import food from "../../assets/food.png";
 import home from "../../assets/home.png";
 import room from "../../assets/room.png";
 import notice from "../../assets/notice.png";
+import report from "../../assets/report.png";
 import food_menu from "../../assets/food_menu.png";
 // import logout from "../../assets/logout.png";
 import MobileProfilePopup from "../MobileProfilePopUp";
@@ -143,13 +144,14 @@ function RectorMobileHeader() {
                   <img className="h-6" src={food} />
                   <span className="text-bg_white">Today's&nbsp;Meal</span>
                 </Link>
-                <li
+                <Link
+                  to={"/rector/allocate-blocks"}
                   onClick={menuToggel}
                   className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
                 >
                   <img className="h-6" src={room} />
                   <span className="text-bg_white">Room&nbsp;Allocation</span>
-                </li>
+                </Link>
                 <Link
                   onClick={menuToggel}
                   to={"/accountant/allnotices"}
@@ -157,6 +159,14 @@ function RectorMobileHeader() {
                 >
                   <img className="h-6" src={notice} />
                   <span className="text-bg_white">Notice</span>
+                </Link>
+                <Link
+                  to={"/rector/report"}
+                  onClick={menuToggel}
+                  className={`text-bg_white text-sm flex items-center gap-x-4 cursor-pointer mb-3 p-2 rounded-md`}
+                >
+                  <img className="h-6" src={report} />
+                  <span className="text-bg_white">Report</span>
                 </Link>
               </ul>
             </div>

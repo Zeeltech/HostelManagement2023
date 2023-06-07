@@ -62,19 +62,19 @@ function AllNotices() {
   return (
     <>
       <ToastContainer />
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <div className="flex justify-center mb-6 text-2xl font-bold labels mt-4 mx-4">
         All notices
       </div>
 
       <AddNoticePopUp />
 
-      <div className="grid lg:grid-cols-4 sm:grid-cols-3 gap-2">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-3 gap-2 mx-6">
         {notices.length > 0 &&
           notices.map((notice) => (
             <>
               <div
                 key={notice._id}
-                className="flex flex-col gap-2 justify-between bg-bg_notice m-1 rounded-lg p-2  relative group break-words"
+                className="flex flex-col gap-2 justify-between bg-bg_notice m-1 rounded-lg p-2 relative group break-words"
               >
                 <div>
                   <div className="flex justify-between">

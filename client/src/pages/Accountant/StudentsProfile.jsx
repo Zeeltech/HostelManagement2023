@@ -27,11 +27,11 @@ function StudentsProfile() {
 
   return (
     <>
-      <div className="flex justify-center mb-6 text-2xl font-bold labels">
+      <div className="flex justify-center mb-6 text-2xl font-bold labels mt-4 mx-4">
         All Students
       </div>
       <AddStudentPopUp fetch={fetch} setFetch={setFetch} />
-      <div>
+      <div className="mx-6">
         <div className="font-semibold">Search student</div>
         <input
           type="text"
@@ -44,7 +44,7 @@ function StudentsProfile() {
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
-      <div className="mt-2 relative rounded-2xl  grid gap-x-6 gap-y-8 grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+      <div className="mt-4 mx-8 relative rounded-2xl grid gap-x-6 gap-y-8 grid-cols-1 sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-8">
         {students &&
           students.length > 0 &&
           students.map((student) => (

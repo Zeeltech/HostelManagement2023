@@ -46,8 +46,7 @@ function AddMeal() {
 
   return (
     <>
-      
-      <div className="flex justify-center mb-6 mt-2">
+      <div className="flex justify-center mb-6 mt-4">
         <button
           className="flex items-center gap-2 bg-bg_red px-4 py-2 text-bg_white_font rounded-md hover:bg-bg_dark_section duration-200"
           onClick={updateMeal}
@@ -56,7 +55,7 @@ function AddMeal() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto max-w-7xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-6 max-w-7xl">
         <div className="border-2 border-bg_dark_section p-4 rounded-md shadow-md shadow-bg_dark_section">
           <div className="mb-6 text-2xl font-bold text-center labels">
             Breakfast
