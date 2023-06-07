@@ -43,6 +43,7 @@ const UserSchema = new mongoose.Schema(
     blockId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Block",
+      default: null,
     },
   },
   { timestamps: true, versionKey: false }
