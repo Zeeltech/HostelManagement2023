@@ -39,7 +39,11 @@ const UserSchema = new mongoose.Schema(
     roomNumber: {
       type: String,
       default: null,
-    }
+    },
+    blockId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Block",
+    },
   },
   { timestamps: true, versionKey: false }
 );

@@ -33,10 +33,9 @@ function AddBlockPopUp({ fetch, setFetch }) {
     ev.preventDefault();
     if (start > end) {
       toast.error("Provide correct range of rooms");
-    }else if(capacity === 0){
+    } else if (capacity === 0) {
       toast.error("Please provide the capacity for the rooms.");
-    } 
-    else {
+    } else {
       axios
         .post("/rector/allocate-block", { name, start, end, capacity })
         .then((res) => {
@@ -91,7 +90,7 @@ function AddBlockPopUp({ fetch, setFetch }) {
                   setName(ev.target.value);
                 }}
                 name="name"
-                placeholder="Enter food item name"
+                placeholder="Enter block name"
               />
             </div>
             <div className="w-full">
