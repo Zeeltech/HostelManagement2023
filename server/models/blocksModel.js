@@ -16,10 +16,8 @@ const BlocksSchema = new mongoose.Schema(
         },
         allocatedStudents: [
           {
-            type: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: "User", // Assuming you have a User model defined
-            },
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User", // Assuming you have a User model defined
           },
         ],
       },

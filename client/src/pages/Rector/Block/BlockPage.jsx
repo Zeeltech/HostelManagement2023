@@ -63,7 +63,7 @@ const BlockPage = () => {
             Block {block.name}
             {console.log(block)}
           </div>
-          <div className="grid grid-cols-4 gap-3 ml-2 mr-4 h-[40vh] overflow-y-scroll border-2 border-black p-4 rounded-md">
+          <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-3 ml-2 mr-4 h-[40vh] overflow-y-scroll border-2 border-black p-4 rounded-md">
             {block.rooms.map((room) => (
               <div
                 className="bg-gray-200 border border-black rounded-lg p-2 flex flex-col items-center"
