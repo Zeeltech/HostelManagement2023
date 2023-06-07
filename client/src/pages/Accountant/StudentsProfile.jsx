@@ -61,6 +61,16 @@ function StudentsProfile() {
                       }
                     ></img>
                   )}
+                  {!student.profilePhoto && (
+                    <img
+                      className="rounded-xl aspect-square object-cover border-2 border-bg_dark_section"
+                      src={
+                        myConstants.BACKEND_URL +
+                        "/uploads/default.png" 
+                      }
+                    ></img>
+                  )}
+
                 </div>
                 <h2 className="text-sm font-bold mb-1 truncate mx-auto bg-bg_red text-bg_white_font rounded-md px-1">
                   {student.rollNo}

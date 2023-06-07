@@ -41,59 +41,58 @@ const getAllBlocks = async (req, res) => {
 
 const allocateStudent = async (req, res) => {
   try {
-    const { id } = req.params; // BLOCK ID
-    const { roomNumber, studentId } = req.body;
+    const { id } = req.params; // Block ID where we want to allocate the student
+    const { roomNumber, studentId } = req.body; // Room number and student ID
 
-    const blockDoc = await Blocks.findById(id);
-    if (!blockDoc) {
+    // Find the block with the given ID
+    const block = await Blocks.findById(id);
+
+    if (!block) {
       return res.status(404).json({ message: "Block not found" });
     }
 
-    let currentRoom = blockDoc.rooms.find(
-      (room) => String(room.number) === String(roomNumber)
-    );
+    // Check if the student is already allocated to another block
+    const student = await User.findById(studentId);
 
-    if (!currentRoom) {
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    if (student.blockId) {
+      // Student is already allocated to a block, deallocate from the current block
+      const currentBlock = await Blocks.findById(student.blockId);
+
+      if (currentBlock) {
+        // Remove the student from the current block's allocatedStudents array
+        currentBlock.rooms.forEach((room) => {
+          room.allocatedStudents.pull(studentId);
+        });
+        await currentBlock.save();
+      }
+    }
+
+    // Find the room in the block with the given roomNumber
+    const room = block.rooms.find((room) => room.number === roomNumber);
+
+    if (!room) {
       return res.status(404).json({ message: "Room not found" });
     }
 
-    if (currentRoom.allocatedStudents.length >= currentRoom.capacity) {
-      return res.status(400).json({
-        message: "The number of allocated users exceeds the room capacity",
-      });
-    }
+    // Allocate the student to the room
+    room.allocatedStudents.push(studentId);
 
-    const isDuplicate = currentRoom.allocatedStudents.some(
-      (user) => user._id.toString() === studentId
-    );
+    // Update the student's blockId and roomNumber
+    student.blockId = block._id;
+    student.roomNumber = roomNumber;
 
-    if (isDuplicate) {
-      return res.status(400).json({
-        message: "This student has already been allocated to this room.",
-      });
-    }
+    // Save the changes
+    await block.save();
+    await student.save();
 
-    currentRoom.allocatedStudents.push({ _id: studentId });
-    const studentDoc = await User.findById({ _id: studentId });
-    if (!studentDoc) {
-      return res.status(404).json({ message: "Student not found" });
-    }
-    if (studentDoc.roomNumber != null) {
-      return res.status(400).json({
-        message: `Student already exists in  room ${studentDoc.roomNumber}`,
-      });
-    }
-
-    studentDoc.set({
-      roomNumber,
-    });
-    await studentDoc.save();
-    await blockDoc.save();
-
-    return res.status(200).json(currentRoom);
+    return res.status(200).json({ message: "Student allocated successfully" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: `Error occured ${error}` });
+    return res.status(500).json({ message: `Error occurred: ${error}` });
   }
 };
 
@@ -117,22 +116,41 @@ const getBlock = async (req, res) => {
   }
 };
 
+// Delete Block API
 const deleteBlock = async (req, res) => {
   try {
-    const { id } = req.params;
-    const blockDoc = await Blocks.findById(id);
+    const { id } = req.params; // Block ID
 
-    if (!blockDoc) {
-      return res.status(404).json({ message: "Block does not exist" });
+    // Find the block with the given ID
+    const block = await Blocks.findById(id);
+
+    if (!block) {
+      return res.status(404).json({ message: "Block not found" });
     }
 
-    await Blocks.deleteOne({ _id: id });
-    return res.status(200).json({ message: "Block deleted" });
+    // Retrieve the list of allocated students in the block
+    const allocatedStudents = block.rooms.reduce(
+      (students, room) => students.concat(room.allocatedStudents),
+      []
+    );
+
+    // Reset the blockId and roomNumber for all allocated students
+    await User.updateMany(
+      { _id: { $in: allocatedStudents } },
+      { blockId: null, roomNumber: null }
+    );
+
+    // Delete the block
+    await Blocks.findByIdAndDelete(id);
+
+    return res.json({ message: "Block deleted successfully" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: `Error occurred ${error}` });
+    return res.status(500).json({ message: `Error occurred: ${error}` });
   }
 };
+
+
 
 module.exports = {
   allocateBlock,
