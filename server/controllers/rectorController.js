@@ -100,10 +100,7 @@ const allocateStudent = async (req, res) => {
 const getBlock = async (req, res) => {
   try {
     const { id } = req.params;
-    const blockDoc = await Blocks.findById(id).populate({
-      path: "rooms",
-      populate: { path: "allocatedStudents.user" },
-    });
+    const blockDoc = await Blocks.findById(id).populate("rooms.allocatedStudents");
 
     if (!blockDoc) {
       return res.status(404).json({ message: "Block does not exist" });
@@ -116,18 +113,17 @@ const getBlock = async (req, res) => {
   }
 };
 
-const deleteBlock = async (req,res) => {
+const deleteBlock = async (req, res) => {
   try {
     const { id } = req.params;
     const blockDoc = await Blocks.findById(id);
 
-    if(!blockDoc){
-      return res.status(404).json({message:"Block does not exist"})
+    if (!blockDoc) {
+      return res.status(404).json({ message: "Block does not exist" });
     }
 
-    await Blocks.deleteOne({_id:id})
-    return res.status(200).json({message:"Block deleted"})
-
+    await Blocks.deleteOne({ _id: id });
+    return res.status(200).json({ message: "Block deleted" });
   } catch (error) {
     console.log(error);
     return res.json({ message: `Error occurred ${error}` });
