@@ -101,8 +101,9 @@ const getBlock = async (req, res) => {
   try {
     const { id } = req.params;
     const blockDoc = await Blocks.findById(id).populate({
-      path : "rooms.allocatedStudents",
-      select : "-password -role -resetPasswordToken -resetPasswordExpires -createdAt -updatedAt"
+      path: "rooms.allocatedStudents",
+      select:
+        "-password -role -resetPasswordToken -resetPasswordExpires -createdAt -updatedAt",
     });
 
     if (!blockDoc) {
