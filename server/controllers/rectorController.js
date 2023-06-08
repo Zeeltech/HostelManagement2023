@@ -150,8 +150,6 @@ const deleteBlock = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   allocateBlock,
   getAllBlocks,
