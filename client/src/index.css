@@ -32,11 +32,11 @@ textarea {
 }
 
 .labels_2 {
-  @apply bg-bg_red text-bg_white text-sm rounded-md py-1 px-2 shadow-md;
+  @apply bg-bg_red text-bg_white text-xs md:text-sm rounded-md py-1 px-2 shadow-md;
 }
 
 .labels_3 {
-  @apply bg-bg_dark_section text-sm text-bg_white rounded-md py-1 px-2 shadow-md;
+  @apply bg-bg_dark_section text-xs md:text-sm text-bg_white rounded-md py-1 px-2 shadow-md;
 }
 
 .red-hover {
