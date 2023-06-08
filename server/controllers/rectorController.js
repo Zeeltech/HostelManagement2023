@@ -42,7 +42,10 @@ const getAllBlocks = async (req, res) => {
 const allocateStudent = async (req, res) => {
   try {
     const { id } = req.params; // Block ID where we want to allocate the student
-    const { roomNumber, studentId } = req.body; // Room number and student ID
+    const { roomNumber, rollNo } = req.body; // Room number and student ID
+
+    const studentDoc = await User.findOne({ rollNo });
+    const studentId = studentDoc._id;
 
     // Find the block with the given ID
     const block = await Blocks.findById(id);
@@ -89,7 +92,18 @@ const allocateStudent = async (req, res) => {
     await block.save();
     await student.save();
 
-    return res.status(200).json({ message: "Student allocated successfully" });
+    const blockDoc = await Blocks.findById(id).populate({
+      path: "rooms.allocatedStudents",
+      select:
+        "-password -role -resetPasswordToken -resetPasswordExpires -createdAt -updatedAt",
+    });
+
+    const roomInfo = blockDoc.rooms.find((room) => room.number === roomNumber);
+
+
+    return res
+      .status(200)
+      .json({ roomInfo });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: `Error occurred: ${error}` });
@@ -149,8 +163,6 @@ const deleteBlock = async (req, res) => {
     return res.status(500).json({ message: `Error occurred: ${error}` });
   }
 };
-
-
 
 module.exports = {
   allocateBlock,
