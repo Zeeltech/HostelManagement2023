@@ -3,6 +3,7 @@ import { UserContext } from "../../../../UserContext";
 import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import Loader from "../../../components/Loader";
 
 function AddStudentPopup({
   blockId,
@@ -16,11 +17,13 @@ function AddStudentPopup({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rollNo, setRollNo] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [loading,setLoading] = useState(false);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
   }
 
+ 
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -31,6 +34,8 @@ function AddStudentPopup({
 
   async function addStudent(ev) {
     ev.preventDefault();
+    closeModal();
+    setLoading(true)
     axios
       .post("/rector/allocate-student/" + blockId, {
         rollNo,
@@ -38,25 +43,26 @@ function AddStudentPopup({
       })
       .then((res) => {
         if (res.status === 200) {
-          closeModal();
+          setLoading(false)
           toast.success("Student allocated successfully");
           setRollNo("");
-          console.log(res.data.roomInfo.allocatedStudents);
           setAllocatedRoomStudents(res.data.roomInfo.allocatedStudents);
           setFetch(true);
         }
       });
   }
 
+  
   return (
     <>
       <ToastContainer />
       {AllocatedRoomStudents.length < capacity && (
         <div
-          onClick={openModal}
-          className="flex justify-center h-full text-2xl items-center border-2 border-gray-400 rounded-md p-2 cursor-pointer hover:bg-gradient-to-t hover:from-gray-300 hover:to-gray-100"
+        onClick={openModal}
+        className="flex justify-center h-full text-2xl items-center border-2 border-gray-400 rounded-md p-2 cursor-pointer hover:bg-gradient-to-t hover:from-gray-300 hover:to-gray-100"
         >
-          +
+          {loading && (<Loader height={"200px"} />)}
+          {!loading && "+"}
         </div>
       )}
       {isModalOpen && (
@@ -84,7 +90,9 @@ function AddStudentPopup({
               <button onClick={closeModal} className="btn">
                 Close
               </button>
-              <button className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:scale-95 hover:duration-200 hover:transition-all">
+              <button
+                className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:scale-95 hover:duration-200 hover:transition-all"
+              >
                 Add
               </button>
             </div>

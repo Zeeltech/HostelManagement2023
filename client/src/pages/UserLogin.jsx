@@ -10,7 +10,6 @@ import Loader from "../components/Loader";
 function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user, setUser } = useContext(UserContext);
@@ -27,10 +26,8 @@ function UserLogin() {
 
   async function loginUser(ev) {
     ev.preventDefault();
-    if (email === "" || password === "" || confirmPassword === "") {
+    if (email === "" || password === "") {
       toast.error("Please fill all fields");
-    } else if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
     } else {
       try {
         await axios
@@ -134,19 +131,7 @@ function UserLogin() {
                 placeholder="Enter the password"
               />
             </div>
-            <div>
-              Confirm Password
-              <input
-                type="password"
-                value={confirmPassword}
-                className="mt-1 mb-2"
-                onChange={(ev) => {
-                  setConfirmPassword(ev.target.value);
-                }}
-                name="confirmPassword"
-                placeholder="Repeat the password"
-              />
-            </div>
+
             <button className="btn">Login</button>
           </form>
         )}
