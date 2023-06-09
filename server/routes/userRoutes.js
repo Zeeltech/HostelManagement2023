@@ -16,6 +16,7 @@ const {
   updateProfile,
   forgotPassword,
   resetPassword,
+  getAllStudents,
 } = require("../controllers/userController");
 const { protectUser } = require("../middlewares/userProtect");
 
@@ -72,5 +73,7 @@ router.get(
 router.post("/forgot-password", forgotPassword);
 
 router.post("/reset-password/:token", resetPassword);
+
+router.get("/get-students",(req, res, next) => protectUser(req, res, next, "Both"),getAllStudents)
 
 module.exports = router;

@@ -6,7 +6,6 @@ import IndexPage from "./pages/IndexPage";
 import { UserContext, UserContextProvider } from "../UserContext";
 import UserLogin from "./pages/UserLogin";
 import AccountantDashboard from "./pages/Accountant/AccountantDashboard";
-import RectorDashboard from "./pages/Rector/RectorDashboard";
 import StudentDashboard from "./pages/Student/StudentDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,6 +35,7 @@ import ResetPassword from "./components/ResetPassword";
 
 import AllocateBlocks from "./pages/Rector/Block/AllocateBlocks";
 import BlockPage from "./pages/Rector/Block/BlockPage";
+import RectorHome from "./pages/Rector/RectorHome";
 
 axios.defaults.baseURL = myContants.BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -49,7 +49,7 @@ function App() {
           <Route path="/" element={<IndexPage />} />
           <Route path="/login" element={<UserLogin />} />
 
-          <Route path="/rector/dashboard" element={<RectorDashboard />} />
+          <Route path="/rector/home" element={<RectorHome />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route
             path="/accountant/dashboard"

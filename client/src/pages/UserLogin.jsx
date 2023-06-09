@@ -18,7 +18,7 @@ function UserLogin() {
     if (user.role == "Student") {
       return <Navigate to="/student/dashboard" />;
     } else if (user.role == "Rector") {
-      return <Navigate to="/rector/dashboard" />;
+      return <Navigate to="/rector/home" />;
     } else if (user.role == "Accountant") {
       return <Navigate to="/accountant/dashboard" />;
     }

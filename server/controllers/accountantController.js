@@ -15,7 +15,7 @@ const getAllStudents = async (req, res) => {
       query.rollNo = { $regex: `^${rollNo}`, $options: "i" };
     }
 
-    const students = await User.find(query);
+    const students = await User.find(query).populate({path:"blockId",select:"name"});
     return res.status(200).json(students);
   } catch (error) {
     console.log(error);
