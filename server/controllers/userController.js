@@ -239,6 +239,16 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const getAllStudents = async(req,res)=>{
+  try {
+    const studentssDoc = await User.find({role:"Student"}).populate({path:"blockId",select:"name"})
+    res.status(200).json(studentssDoc)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -248,4 +258,5 @@ module.exports = {
   updateProfile,
   forgotPassword,
   resetPassword,
+  getAllStudents,
 };
