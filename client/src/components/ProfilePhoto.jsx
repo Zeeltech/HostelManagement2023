@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../UserContext";
 import * as myConst from "../../myConstants";
-import axios from "axios"
+import axios from "axios";
 
 function ProfilePhoto() {
   const { user } = useContext(UserContext);
+  const [count, setCount] = useState(0);
+  const [profilePhotoPath, setProfilePhotoPath] = useState("");
+
+  useEffect(() => {
+    setProfilePhotoPath(myConst.BACKEND_URL + "/uploads/" + user.profilePhoto);
+  }, [count]);
 
   async function photoHandler(ev) {
     ev.preventDefault();
@@ -13,9 +19,10 @@ function ProfilePhoto() {
     axios
       .put("/profile-photo-update", formData, {
         headers: { "Content-type": "multipart/form-data" },
-      }) 
+      })
       .then((res) => {
         alert("Photo uploaded successfully");
+        setCount((prev) => prev + 1);
         window.location.reload(false);
       })
       .catch((err) => console.log(err));
@@ -31,16 +38,16 @@ function ProfilePhoto() {
             onChange={photoHandler}
             name="img"
           />
-          {user.profilePhoto && (
+          {user.profilePhoto ? (
             <>
               <img
-                src={myConst.BACKEND_URL + "/uploads/" + user.profilePhoto}
+                src={profilePhotoPath}
+                // src={myConst.BACKEND_URL + "/uploads/" + user.profilePhoto}
                 alt=""
                 className="rounded-full object-cover aspect-square h-[13rem] hover:bg-black hover:opacity-70 cursor-pointer"
               />
             </>
-          )}
-          {!user.profilePhoto && (
+          ) : (
             <>
               <img
                 src={myConst.BACKEND_URL + "/uploads/default.png"}

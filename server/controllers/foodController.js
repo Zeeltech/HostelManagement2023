@@ -63,6 +63,7 @@ const editFood = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
     let foodPhotoName;
+    console.log(name);
 
     if (req.file) {
       foodPhotoName = req.file.filename;
@@ -85,7 +86,7 @@ const editFood = async (req, res) => {
 
     if (foodPhotoName) {
       foodDoc.set({
-        name,
+        name: name,
         photo: foodPhotoName,
       });
     } else {

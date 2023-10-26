@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../../../UserContext";
 import * as myConstants from "../../../../myConstants";
 
-function EditFoodPopUp({ food }) {
+function EditFoodPopUp({ food, count, setCount }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState(food.name);
   const [photo, setPhoto] = useState(food.photo);
@@ -35,19 +35,21 @@ function EditFoodPopUp({ food }) {
         const formData = new FormData();
         formData.append("photo", photo);
         formData.append("name", name);
+        console.log(food._id);
 
         await axios
-          .put("/food/edit-food/" + id, formData, {
+          .put("/food/edit-food/" + food._id, formData, {
             headers: { "Content-type": "multipart/form-data" },
           })
           .then((res) => {
             if (res.status === 200) {
               toast.success("Updated Successfully");
               setIsModalOpen(false);
+              setCount((prev) => prev + 1);
             }
           });
       } catch (err) {
-        if (err.response.status === 409) toast.error("User already exists");
+        // if (err.response.status === 409) toast.error("Food already exists");
         console.log(err);
       }
     }

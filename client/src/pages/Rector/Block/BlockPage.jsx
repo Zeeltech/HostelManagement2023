@@ -101,7 +101,7 @@ const BlockPage = () => {
                   <div key={student._id}>
                     <div className="flex flex-col sm:flex-row items-center border-2 border-gray-400 rounded-md p-2">
                       <div className="">
-                        {
+                        {student.profilePhoto ? (
                           <img
                             className="aspect-square object-cover h-20 md:h-32 lg:h-32 border-2 border-gray-400 rounded-md"
                             src={
@@ -110,7 +110,14 @@ const BlockPage = () => {
                               student.profilePhoto
                             }
                           ></img>
-                        }
+                        ) : (
+                          <img
+                            className="aspect-square object-cover h-20 md:h-32 lg:h-32 border-2 border-gray-400 rounded-md"
+                            src={
+                              myConstants.BACKEND_URL + "/uploads/default.png"
+                            }
+                          ></img>
+                        )}
                       </div>
                       <div className="flex flex-col items-center md:items-start gap-1 mx-3 mt-1">
                         <div className="text-base md:text-2xl lg:text-2xl font-medium">

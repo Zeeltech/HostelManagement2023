@@ -20,14 +20,14 @@ function IndexPage() {
       return <Navigate to="/accountant/dashboard" />;
     }
   }
-  
+
   return (
     <>
-      <Header />
       <div className="workspace give_height">
-        <div className="relative">
-          <img src={index} alt="index" className="overlay-image -z-50" />
-          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+        <div className="max-h-screen overflow-hidden">
+          <Header />
+          <img src={index} alt="index" className="w-full object-cover" />
+          {/* <div className="   top-0 left-0 w-full h-full bg-black opacity-50"></div> */}
         </div>
       </div>
     </>

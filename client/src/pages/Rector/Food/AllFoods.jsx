@@ -15,6 +15,7 @@ function AllFoods() {
   const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [fetch, setFetch] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     axios.get("/food/get-foods").then((res) => {
@@ -22,7 +23,7 @@ function AllFoods() {
       setLoading(false);
       setFetch(false);
     });
-  }, [fetch]);
+  }, [fetch, count]);
 
   if (!user || (user && user.role !== "Rector")) {
     return <Navigate to="/login" />;
@@ -85,10 +86,10 @@ function AllFoods() {
                   />
                 </svg>
               </div>
-              <EditFoodPopUp food={food} />
+              <EditFoodPopUp food={food} count={count} setCount={setCount} />
             </div>
           ))}
-        <AddFood />
+        <AddFood count={count} setCount={setCount} />
       </div>
     </>
   );

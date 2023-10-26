@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../../../UserContext";
 
-function AddFoodPopUp() {
+function AddFoodPopUp({ count, setCount }) {
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +44,8 @@ function AddFoodPopUp() {
               setIsModalOpen(false);
               setName("");
               setPhoto("");
-              window.location.reload(false);
+              // window.location.reload(false);
+              setCount((prev) => prev + 1);
             }
           });
       } catch (err) {

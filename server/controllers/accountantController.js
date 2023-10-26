@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const RollNo = require("../models/rollNoModel");
+const path = require("path");
 
 /* SALT */
 const salt = bcrypt.genSaltSync(10);
@@ -55,12 +56,20 @@ const getCurrentRollNo = async (req, res) => {
   try {
     const currentYear = new Date().getFullYear();
     const isYear = await RollNo.findOne({ year: currentYear });
+
     if (isYear) {
-      res.status(200).json({ year: currentYear, current: isYear.current + 1 });
+      // Find the highest existing roll number for the current year
+      const highestRollNo = await RollNo.findOne({ year: currentYear }).sort({
+        current: -1,
+      }); // Sort in descending order to get the highest roll number
+
+      const nextRollNo = highestRollNo ? highestRollNo.current + 1 : 1;
+
+      res.status(200).json({ year: currentYear, current: nextRollNo });
     } else {
       RollNo.create({
         year: currentYear,
-        current: `${currentYear}000`,
+        current: `${currentYear}001`, // Start with 001 for a new year
       });
       res
         .status(200)

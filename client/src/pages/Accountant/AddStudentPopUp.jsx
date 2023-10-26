@@ -10,9 +10,9 @@ function AddStudentPopUp({ fetch, setFetch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("example@gmail.com");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("1234");
   const [rollNo, setRollNo] = useState("");
 
   useEffect(() => {

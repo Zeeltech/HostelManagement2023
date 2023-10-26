@@ -1,5 +1,59 @@
 # HostelManagement2023
 
+/**
+* ! USECASES
+
+    * ? ACTORS
+            ** Rector
+            ** Accountant
+            ** Students
+
+        * ? Rector   
+                    ** Everyday food - [Add new item + see previous items] - Update menu
+                    ** Notice to everyone - [Banner] - Notice
+                    ** Room allocation - [Add new rooms - default 3 total 50 ==> 3 edit and add new room => Allocate green and red => Search whole hostel for allocated and free rooms] => Roll no. assign => Profile dekhay jene - Allocate
+                    ** Profile page
+                    ** Report
+                    ** Sign Up -> Name, Email, Phone no., Photo, Password, {[Forget password]}]
+
+        *? Accountant   
+                    ** Notice to everyone - [Banner] - Notice
+                    ** Report
+                    ** Profile of all students - Student info
+                    ** Profile page
+                    ** Sign Up -> Name, Email, Phone no., Photo, Password, {[Forget password]}, Capcha
+
+        *? Students     
+                    ** See profile of his own - Profile
+                    ** Food Menu 
+                    ** Report
+                    ** Notice
+                    ** Report a problem - Report
+                    ** Sign Up -> Name, Email, Photo, Phone no, Password, Roll no. Signup => Only allow if rector allows
+
+
+*/
+
+
+
+/** 
+* ! Future Improvement
+** AC AND NON AC ROOMS 
+** Video call 
+** Leave and scan 
+** Fine if something broken 
+** Password complex 
+** Delete photos from uploads 
+** Fees Structure 
+ */
+
+
+
+
+
+
+
+
 => USECASES
 
     => ACTORS
